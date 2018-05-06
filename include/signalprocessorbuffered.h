@@ -22,6 +22,7 @@
 #include "dsignal_export.h"
 #include "signalprocessor.h"
 #include <deque>
+#include <cstdlib>
 
 namespace dsignal {
 
