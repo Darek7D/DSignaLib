@@ -10,4 +10,4 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 ##############################################################################
 # Testing
 ##############################################################################
-#add_subdirectory(${PROJECT_SOURCE_DIR}/tests)
+add_subdirectory(${PROJECT_SOURCE_DIR}/tests)

@@ -1,24 +1,9 @@
-#include <QtTest>
+#include <catch.hpp>
 #include <filteriir.h>
 
 using namespace dsignal;
 
-class FilterIirTest : public QObject
-{
-    Q_OBJECT
-
-public:
-    FilterIirTest();
-
-private Q_SLOTS:
-    void testPushPop();
-};
-
-FilterIirTest::FilterIirTest()
-{
-}
-
-void FilterIirTest::testPushPop()
+TEST_CASE("filteriir testPushPop", "[filteriir]")
 {
     std::vector<double> coef_a={1.0, 2, 4};
     std::vector<double> coef_b={1, 2, 4};
@@ -30,20 +15,16 @@ void FilterIirTest::testPushPop()
     iir.push(10);
     iir.push(10);
 
+    /*Todo:
     qDebug() << iir.pop();
     qDebug() << iir.pop();
     qDebug() << iir.pop();
     qDebug() << iir.pop();
     qDebug() << iir.pop();
-    qDebug() << iir.pop();
+    qDebug() << iir.pop();*/
 
     /*QVERIFY(fir.pop()==5);
     QVERIFY(fir.pop()==5);
     QVERIFY(fir.pop()==10);
     QVERIFY(fir.pop()==10);*/
 }
-
-
-QTEST_APPLESS_MAIN(FilterIirTest)
-
-#include "tst_filteriir.moc"
