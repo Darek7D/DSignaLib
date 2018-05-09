@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "filteriir.h"
+#include <dsignal/filteriir.h>
 #include <stdexcept>
 #include <cfenv>
 

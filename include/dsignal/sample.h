@@ -16,8 +16,8 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SAMPLE_H
-#define SAMPLE_H
+#ifndef DSIGNAL_SAMPLE_H
+#define DSIGNAL_SAMPLE_H
 
 #include "dsignal_export.h"
 #include <cstdlib>
@@ -25,7 +25,7 @@
 
 namespace dsignal {
 
-class DSIGNALIB_EXPORT Sample
+class DSIGNAL_EXPORT Sample
 {
 public:
     Sample();
@@ -43,4 +43,4 @@ private:
 
 }
 
-#endif // SAMPLE_H
+#endif // DSIGNAL_SAMPLE_H

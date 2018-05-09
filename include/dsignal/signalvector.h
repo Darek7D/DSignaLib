@@ -16,19 +16,19 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SIGNALVECTOR_H
-#define SIGNALVECTOR_H
+#ifndef DSIGNAL_SIGNALVECTOR_H
+#define DSIGNAL_SIGNALVECTOR_H
 
-#include "dsignal_export.h"
-#include "signalprocessor.h"
 #include "sample.h"
+#include "signalprocessor.h"
+#include "dsignal_export.h"
 #include <string>
 
 namespace dsignal {
 
 typedef std::vector<SignalProcessor*> TSignals;
 
-class DSIGNALIB_EXPORT SignalVector
+class DSIGNAL_EXPORT SignalVector
 {
 public:
     SignalVector(size_t channels, const SignalProcessor &signal_processor, std::string name="signal");
@@ -57,4 +57,4 @@ inline SignalVector& operator>>(Sample& sample, SignalVector& signal)
 
 }
 
-#endif // SIGNALVECTOR_H
+#endif // DSIGNAL_SIGNALVECTOR_H

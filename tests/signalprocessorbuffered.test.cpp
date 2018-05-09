@@ -1,5 +1,5 @@
+#include <dsignal/signalprocessorbuffered.h>
 #include <catch.hpp>
-#include <signalprocessorbuffered.h>
 
 using namespace dsignal;
 

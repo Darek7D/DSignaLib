@@ -16,8 +16,8 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILTERIIR_H
-#define FILTERIIR_H
+#ifndef DSIGNAL_FILTERFIR_H
+#define DSIGNAL_FILTERFIR_H
 
 #include "signalprocessorbuffered.h"
 #include "dsignal_export.h"
@@ -26,28 +26,24 @@
 
 namespace dsignal {
 
-class DSIGNALIB_EXPORT FilterIir: public SignalProcessorBuffered
+class DSIGNAL_EXPORT FilterFir: public SignalProcessorBuffered
 {
 public:
-    FilterIir(const std::vector<double> &b,
-              const std::vector<double> &a,
-              int max_buffer_size=1024);
-    FilterIir(const FilterIir &filter);
+    FilterFir(const std::vector<double> &a, int max_buffer_size=1024);
+    FilterFir(const FilterFir& filter);
 
     void push(double value) override;
     void reset() override;
-    FilterIir *clone() const override;
+    FilterFir *clone() const override;
 
 protected:
     virtual void process();
 
 private:
     std::deque<double> m_filter_buffer;
-    std::deque<double> m_filter_feedback;
-    std::vector<double> m_b;
     std::vector<double> m_a;
 };
 
 }
 
-#endif // FILTERIIR_H
+#endif // DSIGNAL_FILTERFIR_H

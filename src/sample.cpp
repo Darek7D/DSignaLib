@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "sample.h"
+#include <dsignal/sample.h>
 
 namespace dsignal {
 

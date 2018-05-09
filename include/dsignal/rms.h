@@ -16,8 +16,8 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef RMS_H
-#define RMS_H
+#ifndef DSIGNAL_RMS_H
+#define DSIGNAL_RMS_H
 
 #include "signalprocessorbuffered.h"
 #include "dsignal_export.h"
@@ -26,7 +26,7 @@
 
 namespace dsignal {
 
-class DSIGNALIB_EXPORT Rms: public SignalProcessorBuffered
+class DSIGNAL_EXPORT Rms: public SignalProcessorBuffered
 {
 public:
     Rms(size_t dimension=2);
@@ -43,4 +43,4 @@ private:
 
 }
 
-#endif // RMS_H
+#endif // DSIGNAL_RMS_H

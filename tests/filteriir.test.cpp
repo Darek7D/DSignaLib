@@ -1,5 +1,5 @@
+#include <dsignal/filteriir.h>
 #include <catch.hpp>
-#include <filteriir.h>
 
 using namespace dsignal;
 

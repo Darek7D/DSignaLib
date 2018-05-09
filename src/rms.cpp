@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "rms.h"
+#include <dsignal/rms.h>
 #include <stdexcept>
 #include <cmath>
 #include <cfenv>

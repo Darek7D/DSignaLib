@@ -19,14 +19,14 @@
 #ifndef DSIGNAL_SIGNALPROCESSORBUFFERED_H
 #define DSIGNAL_SIGNALPROCESSORBUFFERED_H
 
-#include "dsignal_export.h"
 #include "signalprocessor.h"
+#include "dsignal_export.h"
 #include <deque>
 #include <cstdlib>
 
 namespace dsignal {
 
-class DSIGNALIB_EXPORT SignalProcessorBuffered: public SignalProcessor {
+class DSIGNAL_EXPORT SignalProcessorBuffered: public SignalProcessor {
 public:
     SignalProcessorBuffered(size_t max_size=1024);
     SignalProcessorBuffered(const SignalProcessorBuffered &s);

@@ -23,7 +23,7 @@
 
 namespace dsignal {
 
-class DSIGNALIB_EXPORT SignalProcessor
+class DSIGNAL_EXPORT SignalProcessor
 {
 public:
     virtual ~SignalProcessor() {}

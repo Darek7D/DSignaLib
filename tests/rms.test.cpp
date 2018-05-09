@@ -1,6 +1,6 @@
-#include <catch.hpp>
-#include <rms.h>
+#include <dsignal/rms.h>
 #include <limits>
+#include <catch.hpp>
 
 using namespace dsignal;
 

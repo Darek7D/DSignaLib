@@ -1,2 +1,2 @@
-# DSignaLib
-Signal pipeline small simple library.
+# DSignal library
+The small simple signal pipeline library.

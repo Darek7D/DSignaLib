@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "signalprocessorbuffered.h"
+#include <dsignal/signalprocessorbuffered.h>
 #include <stdexcept>
 
 namespace dsignal {

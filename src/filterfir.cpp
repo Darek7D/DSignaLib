@@ -16,7 +16,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "filterfir.h"
+#include <dsignal/filterfir.h>
 #include <algorithm>
 #include <stdexcept>
 #include <cfenv>

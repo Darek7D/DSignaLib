@@ -1,6 +1,6 @@
+#include <dsignal/signalprocessorbuffered.h>
+#include <dsignal/signalvector.h>
 #include <catch.hpp>
-#include <signalvector.h>
-#include <signalprocessorbuffered.h>
 
 using namespace dsignal;
 

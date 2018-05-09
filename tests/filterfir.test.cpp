@@ -1,5 +1,5 @@
+#include <dsignal/filterfir.h>
 #include <catch.hpp>
-#include <filterfir.h>
 
 using namespace dsignal;
 

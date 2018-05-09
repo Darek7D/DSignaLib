@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 set (CMAKE_CXX_STANDARD 11)
-project(DSignaLib)
+project(dsignal)
 
 ##############################################################################
 # OPTIONS
@@ -20,17 +20,17 @@ ENDIF (BUILD_SHARED_LIBS)
 ##############################################################################
 set(
   DSIGNAL_HEADERS
-    include/filterfir.h
-    include/filteriir.h
-    include/rms.h
-    include/sample.h
-    include/signalprocessor.h
-    include/signalprocessorbuffered.h
-    include/signalvector.h
+    include/dsignal/filterfir.h
+    include/dsignal/filteriir.h
+    include/dsignal/rms.h
+    include/dsignal/sample.h
+    include/dsignal/signalprocessor.h
+    include/dsignal/signalprocessorbuffered.h
+    include/dsignal/signalvector.h
 )
 
 # Install header files
-install(FILES ${DSIGNAL_HEADERS} DESTINATION include)
+install(FILES ${DSIGNAL_HEADERS} DESTINATION include/dsignal)
 
 ##############################################################################
 # MSVC 
