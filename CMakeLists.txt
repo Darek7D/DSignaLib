@@ -26,7 +26,9 @@ set(
     include/dsignal/sample.h
     include/dsignal/signalprocessor.h
     include/dsignal/signalprocessorbuffered.h
+    include/dsignal/signalprocessorsimple.h
     include/dsignal/signalvector.h
+    include/dsignal/signalsplitter.h
 )
 
 # Install header files

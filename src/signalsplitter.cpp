@@ -16,35 +16,34 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/signalvector.h>
-#include <dsignal/signalprocessorbuffered.h>
-#include <catch.hpp>
+#include <dsignal/signalsplitter.h>
+#include <dsignal/signalprocessorsimple.h>
+#include <cassert>
+#include <iostream>
 
-using namespace dsignal;
+namespace dsignal {
 
-TEST_CASE("signalvector testPushPop", "[signalvector]")
+SignalSplitter::SignalSplitter(std::string name):
+    SignalVector(0, SignalProcessorSimple(), name)
 {
-    SignalVector sig(4, SignalProcessorBuffered(6));
-    REQUIRE(sig.has()==false);
 
-    Sample s(4);
-    s.set(0, 10);
-    s.set(1, 11);
-    s.set(2, 12);
-    s.set(3, 13);
+}
 
-    sig.push(s);
-    sig.push(s);
+SignalSplitter::~SignalSplitter()
+{
 
-    Sample s1 = sig.pop();
-    REQUIRE(s1.get(0)==10);
-    REQUIRE(s1.get(1)==11);
-    REQUIRE(s1.get(2)==12);
-    REQUIRE(s1.get(3)==13);
+}
 
-    Sample s2 = sig.pop();
-    REQUIRE(s2.get(0)==10);
-    REQUIRE(s2.get(1)==11);
-    REQUIRE(s2.get(2)==12);
-    REQUIRE(s2.get(3)==13);
+SignalSplitter &SignalSplitter::split(SignalVector &signal_vector_destination)
+{
+    m_destinations.push_back(&signal_vector_destination);
+    return *this;
+}
+
+void SignalSplitter::push(const Sample &sample)
+{
+    for (auto v: m_destinations)
+        v->push(sample);
+}
+
 }

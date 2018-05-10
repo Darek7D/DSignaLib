@@ -11,7 +11,9 @@ set(
       rms.cpp
       sample.cpp
       signalprocessorbuffered.cpp
+      signalprocessorsimple.cpp
       signalvector.cpp
+      signalsplitter.cpp
 )
 
 ##############################################################################

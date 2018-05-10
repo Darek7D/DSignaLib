@@ -4,7 +4,8 @@ set(UNIT_TEST_LIST
   rms
   signalpipeline
   signalprocessorbuffered
-  signalvector)
+  signalvector
+  signalsplitter)
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)
   list(APPEND UNIT_TEST_SOURCE_LIST

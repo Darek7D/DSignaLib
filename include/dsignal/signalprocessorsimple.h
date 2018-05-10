@@ -16,35 +16,31 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/signalvector.h>
-#include <dsignal/signalprocessorbuffered.h>
-#include <catch.hpp>
+#ifndef DSIGNAL_SIGNALPROCESSORSIMPLE_H
+#define DSIGNAL_SIGNALPROCESSORSIMPLE_H
 
-using namespace dsignal;
+#include "dsignal_export.h"
+#include "signalprocessor.h"
 
-TEST_CASE("signalvector testPushPop", "[signalvector]")
+namespace dsignal {
+
+class DSIGNAL_EXPORT SignalProcessorSimple: public SignalProcessor
 {
-    SignalVector sig(4, SignalProcessorBuffered(6));
-    REQUIRE(sig.has()==false);
+public:
+    SignalProcessorSimple();
+    SignalProcessorSimple(const SignalProcessorSimple &signal_processor_simple);
+    virtual ~SignalProcessorSimple() {}
+    double pop() override;
+    bool has() override;
+    void push(double value) override;
+    void reset() override;
+    SignalProcessorSimple *clone() const override;
 
-    Sample s(4);
-    s.set(0, 10);
-    s.set(1, 11);
-    s.set(2, 12);
-    s.set(3, 13);
+private:
+    double m_value;
+    bool m_has;
+};
 
-    sig.push(s);
-    sig.push(s);
-
-    Sample s1 = sig.pop();
-    REQUIRE(s1.get(0)==10);
-    REQUIRE(s1.get(1)==11);
-    REQUIRE(s1.get(2)==12);
-    REQUIRE(s1.get(3)==13);
-
-    Sample s2 = sig.pop();
-    REQUIRE(s2.get(0)==10);
-    REQUIRE(s2.get(1)==11);
-    REQUIRE(s2.get(2)==12);
-    REQUIRE(s2.get(3)==13);
 }
+
+#endif // DSIGNAL_SIGNALPROCESSORSIMPLE_H

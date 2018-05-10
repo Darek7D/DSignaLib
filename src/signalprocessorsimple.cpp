@@ -16,38 +16,50 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_FILTERIIR_H
-#define DSIGNAL_FILTERIIR_H
-
-#include "signalprocessorbuffered.h"
-#include "dsignal_export.h"
-#include <deque>
-#include <vector>
+#include <dsignal/signalprocessorsimple.h>
+#include <stdexcept>
 
 namespace dsignal {
 
-class DSIGNAL_EXPORT FilterIir: public SignalProcessorBuffered
+SignalProcessorSimple::SignalProcessorSimple():
+    m_value(0.0),
+    m_has(false)
 {
-public:
-    FilterIir(const std::vector<double> &b,
-              const std::vector<double> &a,
-              int max_buffer_size=1024);
-    FilterIir(const FilterIir &filter);
-
-    void push(double value) override;
-    void reset() override;
-    FilterIir *clone() const override;
-
-protected:
-    virtual void process();
-
-private:
-    std::deque<double> m_filter_buffer;
-    std::deque<double> m_filter_feedback;
-    std::vector<double> m_b;
-    std::vector<double> m_a;
-};
 
 }
 
-#endif // DSIGNAL_FILTERIIR_H
+SignalProcessorSimple::SignalProcessorSimple(const SignalProcessorSimple &signal_processor_simple)
+    : SignalProcessorSimple()
+{
+
+}
+
+double SignalProcessorSimple::pop()
+{
+    m_has = false;
+    return m_value;
+}
+
+bool SignalProcessorSimple::has()
+{
+    return m_has;
+}
+
+void SignalProcessorSimple::push(double value)
+{
+    m_value = value;
+    m_has = true;
+}
+
+void SignalProcessorSimple::reset()
+{
+    m_has = false;
+}
+
+SignalProcessorSimple *SignalProcessorSimple::clone() const
+{
+    return new SignalProcessorSimple(*this);
+}
+
+
+}

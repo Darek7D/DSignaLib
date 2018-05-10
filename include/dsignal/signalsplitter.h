@@ -16,35 +16,31 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/signalvector.h>
-#include <dsignal/signalprocessorbuffered.h>
-#include <catch.hpp>
+#ifndef DSIGNAL_SIGNALSPLITTER_H
+#define DSIGNAL_SIGNALSPLITTER_H
 
-using namespace dsignal;
+#include "sample.h"
+#include "signalprocessor.h"
+#include "signalvector.h"
+#include "dsignal_export.h"
+#include <string>
+#include <vector>
 
-TEST_CASE("signalvector testPushPop", "[signalvector]")
+namespace dsignal {
+
+class DSIGNAL_EXPORT SignalSplitter: public SignalVector
 {
-    SignalVector sig(4, SignalProcessorBuffered(6));
-    REQUIRE(sig.has()==false);
+public:
+    SignalSplitter(std::string name="splitter");
+    virtual ~SignalSplitter();
 
-    Sample s(4);
-    s.set(0, 10);
-    s.set(1, 11);
-    s.set(2, 12);
-    s.set(3, 13);
+    SignalSplitter& split(SignalVector &signal_vector_destination);
+    void push(const Sample &sample) override;
 
-    sig.push(s);
-    sig.push(s);
+private:
+    std::vector<SignalVector*> m_destinations;
+};
 
-    Sample s1 = sig.pop();
-    REQUIRE(s1.get(0)==10);
-    REQUIRE(s1.get(1)==11);
-    REQUIRE(s1.get(2)==12);
-    REQUIRE(s1.get(3)==13);
-
-    Sample s2 = sig.pop();
-    REQUIRE(s2.get(0)==10);
-    REQUIRE(s2.get(1)==11);
-    REQUIRE(s2.get(2)==12);
-    REQUIRE(s2.get(3)==13);
 }
+
+#endif // DSIGNAL_SIGNALSPLITTER_H
