@@ -16,43 +16,33 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/decimator.h>
+#include <dsignal/additionner.h>
 #include <stdexcept>
 
 namespace dsignal {
 
-Decimator::Decimator(int factor, size_t max_size):
+Additionner::Additionner(double addend, size_t max_size):
     SignalProcessorBuffered(max_size),
-    m_factor(factor),
-    m_counter(0)
+    m_addend(addend)
 {
-    if (m_factor<=0)
-        throw std::invalid_argument("Wrong value of the factor! The factor must be greater than 0.");
+
 }
 
-Decimator::Decimator(const Decimator &s):
+Additionner::Additionner(const Additionner &s):
     SignalProcessorBuffered(s),
-    m_factor(s.m_factor)
+    m_addend(s.m_addend)
 {
 
 }
 
-void Decimator::push(double value)
+void Additionner::push(double value)
 {
-    if (m_counter%m_factor==0)
-        SignalProcessorBuffered::push(value);
-    m_counter++;
+    SignalProcessorBuffered::push(value+m_addend);
 }
 
-void Decimator::reset()
+Additionner *Additionner::clone() const
 {
-    SignalProcessorBuffered::reset();
-    m_counter=0;
-}
-
-Decimator *Decimator::clone() const
-{
-    return new Decimator( *this );
+    return new Additionner( *this );
 }
 
 }

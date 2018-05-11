@@ -16,43 +16,31 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/decimator.h>
+#include <dsignal/multiplier.h>
 #include <stdexcept>
 
 namespace dsignal {
 
-Decimator::Decimator(int factor, size_t max_size):
+Multiplier::Multiplier(double multiplier, size_t max_size):
     SignalProcessorBuffered(max_size),
-    m_factor(factor),
-    m_counter(0)
+    m_multiplier(multiplier)
 {
-    if (m_factor<=0)
-        throw std::invalid_argument("Wrong value of the factor! The factor must be greater than 0.");
 }
 
-Decimator::Decimator(const Decimator &s):
+Multiplier::Multiplier(const Multiplier &s):
     SignalProcessorBuffered(s),
-    m_factor(s.m_factor)
+    m_multiplier(s.m_multiplier)
 {
-
 }
 
-void Decimator::push(double value)
+void Multiplier::push(double value)
 {
-    if (m_counter%m_factor==0)
-        SignalProcessorBuffered::push(value);
-    m_counter++;
+    SignalProcessorBuffered::push(value*m_multiplier);
 }
 
-void Decimator::reset()
+Multiplier *Multiplier::clone() const
 {
-    SignalProcessorBuffered::reset();
-    m_counter=0;
-}
-
-Decimator *Decimator::clone() const
-{
-    return new Decimator( *this );
+    return new Multiplier( *this );
 }
 
 }

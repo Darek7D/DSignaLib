@@ -6,10 +6,12 @@ include (GenerateExportHeader)
 ##############################################################################
 set(
   DSIGNAL_SOURCES
+      additionner.cpp
       decimator.cpp
       filterfir.cpp
       filteriir.cpp
       rms.cpp
+      multiplier.cpp
       sample.cpp
       signalprocessorsimple.cpp
       signalprocessorbuffered.cpp

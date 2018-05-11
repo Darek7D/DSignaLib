@@ -16,8 +16,8 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_DECIMATOR_H
-#define DSIGNAL_DECIMATOR_H
+#ifndef DSIGNAL_ADDITIONNER_H
+#define DSIGNAL_ADDITIONNER_H
 
 #include "signalprocessorbuffered.h"
 #include "dsignal_export.h"
@@ -26,20 +26,18 @@
 
 namespace dsignal {
 
-class DSIGNAL_EXPORT Decimator: public SignalProcessorBuffered {
+class DSIGNAL_EXPORT Additionner: public SignalProcessorBuffered {
 public:
-    Decimator(int factor, size_t max_size=1024);
-    Decimator(const Decimator &s);
+    Additionner(double addend, size_t max_size=1024);
+    Additionner(const Additionner &s);
     void push(double value) override;
-    void reset() override;
 
-    Decimator *clone() const override;
+    Additionner *clone() const override;
 
 private:
-    int m_factor;
-    int m_counter;
+    double m_addend;
 };
 
 }
 
-#endif // DSIGNAL_DECIMATOR_H
+#endif // DSIGNAL_ADDITIONNER_H

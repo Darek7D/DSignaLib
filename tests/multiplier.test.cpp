@@ -16,30 +16,30 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_DECIMATOR_H
-#define DSIGNAL_DECIMATOR_H
+#include <dsignal/multiplier.h>
+#include <catch.hpp>
 
-#include "signalprocessorbuffered.h"
-#include "dsignal_export.h"
-#include <deque>
-#include <cstdlib>
+using namespace dsignal;
 
-namespace dsignal {
+SCENARIO("multiplier push pop test", "[multiplier]")
+{
+    GIVEN("A multiplier with 2.5 factor") {
+        Multiplier m(2.5);
 
-class DSIGNAL_EXPORT Decimator: public SignalProcessorBuffered {
-public:
-    Decimator(int factor, size_t max_size=1024);
-    Decimator(const Decimator &s);
-    void push(double value) override;
-    void reset() override;
+        REQUIRE(m.has()==false);
 
-    Decimator *clone() const override;
+        WHEN("push two values") {
+            m.push(1);
+            m.push(10);
 
-private:
-    int m_factor;
-    int m_counter;
-};
+            THEN("it has some data") {
+                REQUIRE(m.has()==true);
+            }
 
+            THEN("output values are multiplied") {
+                REQUIRE(m.pop()==2.5);
+                REQUIRE(m.pop()==25);
+            }
+        }
+    }
 }
-
-#endif // DSIGNAL_DECIMATOR_H

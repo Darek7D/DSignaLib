@@ -1,9 +1,11 @@
 set(UNIT_TEST_LIST
+  additionner
   signalprocessorbuffered
   decimator
   filterfir
   filteriir
   rms
+  multiplier
   signalvector
   signalpipeline
   signalsplitter)
