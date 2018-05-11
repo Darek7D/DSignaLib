@@ -1,10 +1,11 @@
 set(UNIT_TEST_LIST
+  signalprocessorbuffered
+  decimator
   filterfir
   filteriir
   rms
-  signalpipeline
-  signalprocessorbuffered
   signalvector
+  signalpipeline
   signalsplitter)
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)

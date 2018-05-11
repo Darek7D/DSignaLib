@@ -20,13 +20,14 @@ ENDIF (BUILD_SHARED_LIBS)
 ##############################################################################
 set(
   DSIGNAL_HEADERS
+    include/dsignal/decimator.h
     include/dsignal/filterfir.h
     include/dsignal/filteriir.h
     include/dsignal/rms.h
     include/dsignal/sample.h
     include/dsignal/signalprocessor.h
-    include/dsignal/signalprocessorbuffered.h
     include/dsignal/signalprocessorsimple.h
+    include/dsignal/signalprocessorbuffered.h
     include/dsignal/signalvector.h
     include/dsignal/signalsplitter.h
 )
