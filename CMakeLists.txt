@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
-set (CMAKE_CXX_STANDARD 11)
+cmake_minimum_required(VERSION 2.8)
 project(dsignal)
+set (CMAKE_CXX_STANDARD 11)
 
 ##############################################################################
 # LIBRARY VERSION
@@ -50,7 +50,25 @@ set(
 install(FILES ${DSIGNAL_HEADERS} DESTINATION include/dsignal)
 
 ##############################################################################
-# MSVC 
+# Output directories
+##############################################################################
+# Libraries
+SET (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin
+  CACHE PATH "Directory for all libraries"
+  )
+
+# Executables
+SET (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin
+  CACHE PATH "Directory for all executables."
+  )
+
+# Static libraries
+SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin
+  CACHE PATH "Directory for all static libraries."
+  )
+
+##############################################################################
+# Max Warning level
 ##############################################################################
 foreach(flag_var
         CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
@@ -60,7 +78,6 @@ foreach(flag_var
    endif(${flag_var} MATCHES "/MD")
 endforeach(flag_var)
 
-# Max Warning level
 if(MSVC)
   # Force to always compile with W4
   if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
@@ -68,7 +85,7 @@ if(MSVC)
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
   endif()
-elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+ elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic --std=c++11")
 endif()
 
