@@ -21,6 +21,7 @@ ENDIF (BUILD_SHARED_LIBS)
 set(
   DSIGNAL_HEADERS
     include/dsignal/additionner.h
+    include/dsignal/dcmeanremoval.h
     include/dsignal/decimator.h
     include/dsignal/filterfir.h
     include/dsignal/filteriir.h

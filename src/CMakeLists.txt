@@ -7,6 +7,7 @@ include (GenerateExportHeader)
 set(
   DSIGNAL_SOURCES
       additionner.cpp
+      dcmeanremoval.cpp
       decimator.cpp
       filterfir.cpp
       filteriir.cpp

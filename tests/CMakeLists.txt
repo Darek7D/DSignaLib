@@ -1,6 +1,7 @@
 set(UNIT_TEST_LIST
   additionner
   signalprocessorbuffered
+  dcmeanremoval
   decimator
   filterfir
   filteriir
