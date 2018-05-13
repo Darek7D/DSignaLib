@@ -18,7 +18,8 @@
 
 #include <dsignal/dcmeanremoval.h>
 #include <stdexcept>
-#include <iostream>
+#include <cmath>
+#include <cfenv>
 
 namespace dsignal {
 
