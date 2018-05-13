@@ -3,13 +3,23 @@ set (CMAKE_CXX_STANDARD 11)
 project(dsignal)
 
 ##############################################################################
+# LIBRARY VERSION
+##############################################################################
+SET (DSIGNAL_VERSION_MAJOR 1)
+SET (DSIGNAL_VERSION_MINOR 0)
+SET (DSIGNAL_VERSION_FIX 0)
+
+configure_file("${CMAKE_SOURCE_DIR}/include/dsignal/version.h.in" "${CMAKE_BINARY_DIR}/include/dsignal/version.h" @ONLY)
+
+##############################################################################
 # OPTIONS
 ##############################################################################
 # Allow the developer to select if Dynamic or Static libraries are built
 OPTION (BUILD_SHARED_LIBS "Build Shared Libraries" ON)
 
-
-# Set the LIB_TYPE variable to STATIC
+##############################################################################
+# Setup library type
+##############################################################################
 SET (LIB_TYPE STATIC)
 IF (BUILD_SHARED_LIBS)
   SET (LIB_TYPE SHARED)
@@ -33,6 +43,7 @@ set(
     include/dsignal/signalprocessorbuffered.h
     include/dsignal/signalvector.h
     include/dsignal/signalsplitter.h
+    "${CMAKE_BINARY_DIR}/include/dsignal/version.h"
 )
 
 # Install header files
