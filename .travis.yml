@@ -4,11 +4,6 @@ compiler:
   - clang
   - gcc
 
-script:
-  - mkdir build
-  - cd build
-  - cmake .. && make
-
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
@@ -25,5 +20,10 @@ addons:
       description: "The small simple signal pipeline library."
     notification_email: darek7d@gmail.com
     build_command_prepend: "mkdir coverity && cd coverity && cmake .."
-    build_command: "make"
+    build_command: "make -j2"
     branch_pattern: coverity_scan
+
+script:
+  - mkdir build
+  - cd build
+  - cmake .. && make
