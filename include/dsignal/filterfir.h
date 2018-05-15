@@ -26,6 +26,12 @@
 
 namespace dsignal {
 
+/**
+ * Filter FIR
+ *
+ * This implementation of FIR filter, filters the "online" signal according to
+ * the provided parameters.
+ */
 class DSIGNAL_EXPORT FilterFir: public SignalProcessorBuffered
 {
 public:

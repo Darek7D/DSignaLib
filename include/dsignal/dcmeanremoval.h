@@ -27,6 +27,19 @@ namespace dsignal {
 
 /**
  * DC offset mean removal signal processor.
+ *
+ * This signal processor module, removes an offset from the signal.
+ * Used method is to calculate the arithmetic mean from 'mean_samples' and
+ * substract it from current pushed value.
+ *
+ * Example signal diagram:
+ * \code
+ * [values]^           |<--mean_samples-->|
+ *         |           |                  |
+ *         |~~samples~~~~~~~~~~~~~~~~~~~~~~
+ *         |
+ *         |---------------------------------> [samples]
+ * \endcode
  */
 class DSIGNAL_EXPORT DcMeanRemoval: public SignalProcessorBuffered {
 public:

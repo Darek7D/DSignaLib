@@ -43,6 +43,8 @@ DcMeanRemoval::DcMeanRemoval(const DcMeanRemoval &s):
 
 void DcMeanRemoval::push(double value)
 {
+    std::feclearexcept(FE_ALL_EXCEPT);
+
     // Keep no more than m_mean_samples samples
     if (m_mean_buffer.size()>=m_mean_samples) {
         m_current_sum-=m_mean_buffer.front();

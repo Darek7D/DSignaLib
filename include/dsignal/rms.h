@@ -25,10 +25,16 @@
 #include <vector>
 
 namespace dsignal {
-
+/**
+ * RMS online processor.
+ */
 class DSIGNAL_EXPORT Rms: public SignalProcessorBuffered
 {
 public:
+    /**
+     * Constructs the RMS module
+     * \param dimension number of samples to collect
+     */
     Rms(size_t dimension=2);
     Rms(const Rms &rms);
     void push(double value) override;

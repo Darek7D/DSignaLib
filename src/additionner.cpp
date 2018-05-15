@@ -18,6 +18,11 @@
 
 #include <dsignal/additionner.h>
 #include <stdexcept>
+#include <cfenv>
+#include <limits>
+#include <cmath>
+
+#pragma STDC FENV_ACCESS ON
 
 namespace dsignal {
 
@@ -37,7 +42,17 @@ Additionner::Additionner(const Additionner &s):
 
 void Additionner::push(double value)
 {
-    SignalProcessorBuffered::push(value+m_addend);
+    std::feclearexcept(FE_ALL_EXCEPT);
+    double new_value = value + m_addend;
+
+    if(std::fetestexcept(FE_INVALID	  ))
+        throw std::runtime_error("FE_INVALID computation error!");
+    if(std::fetestexcept(FE_OVERFLOW  ))
+        throw std::runtime_error("Overflow computation error!");
+    if(std::fetestexcept(FE_UNDERFLOW ))
+        throw std::runtime_error("Underflow computation error!");
+
+    SignalProcessorBuffered::push(new_value);
 }
 
 Additionner *Additionner::clone() const

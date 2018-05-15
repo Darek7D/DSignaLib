@@ -26,19 +26,49 @@
 
 namespace dsignal {
 
+/**
+ * The SignalProcessor with buffered data. You can push data until it
+ * reaches the size of max_size. Than you can pop it at any time.
+ * It works like a simple queue.
+ * When you overflow the buffer, an the std::overflow_error will be thrown.
+ */
 class DSIGNAL_EXPORT SignalProcessorBuffered: public SignalProcessor {
 public:
+    /**
+     * Constructs the SignalProcessorBuffered object.
+     * \param max_size max size of the internal buffer.
+     */
     SignalProcessorBuffered(size_t max_size=1024);
     SignalProcessorBuffered(const SignalProcessorBuffered &s);
+
+    /**
+     * @copydoc SignalProcessor::push()
+     *
+     * When you overflow the buffer, an the std::overflow_error will be thrown.
+     */
     void push(double value) override;
-    double pop() override;
 
     bool has() override;
+
+    /**
+     * @copydoc SignalProcessor::pop()
+     *
+     * When you pop() an empty buffer, an the std::out_of_range will be thrown.
+     */
+    double pop() override;
+
     void reset() override;
 
     SignalProcessorBuffered *clone() const override;
 
+    /**
+     * The current size of buffer.
+     */
     virtual size_t size();
+
+    /**
+     * The max size of the buffer.
+     */
     virtual size_t maxSize();
 
 protected:

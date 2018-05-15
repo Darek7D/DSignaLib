@@ -26,9 +26,20 @@
 
 namespace dsignal {
 
+/**
+ * Filter FIR
+ *
+ * This implementation of FIR filter, filters the "online" signal according to
+ * the provided parameters.
+ */
 class DSIGNAL_EXPORT FilterIir: public SignalProcessorBuffered
 {
 public:
+    /**
+     * Filter constructor.
+     * \param b filter coefficient nominator
+     * \param a filter coefficient denominator
+     */
     FilterIir(const std::vector<double> &b,
               const std::vector<double> &a,
               int max_buffer_size=1024);
