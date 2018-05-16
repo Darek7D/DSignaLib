@@ -22,19 +22,32 @@
 
 namespace dsignal {
 
-SignalFlow::SignalFlow(SignalFlowSession & session, size_t channels, const SignalProcessor &signal_processor, std::string name):
+SignalFlow::SignalFlow():
+    SignalVector(),
+    m_session(nullptr)
+{
+
+}
+
+SignalFlow::SignalFlow(SignalFlowSession *session, size_t channels, const SignalProcessor &signal_processor, std::string name):
     SignalVector(channels, signal_processor, name),
     m_session(session)
 {
 }
 
 SignalFlow& SignalFlow::operator>>(SignalFlow& output_flow) {
-    m_session.connect(this, &output_flow);
+    if (m_session==nullptr)
+        throw std::runtime_error("No session defined!");
+
+    m_session->connect(this, &output_flow);
     return output_flow;
 }
 
 SignalFlow& SignalFlow::split(SignalFlow &output_flow) {
-    m_session.connect(this, &output_flow);
+    if (m_session==nullptr)
+        throw std::runtime_error("No session defined!");
+
+    m_session->connect(this, &output_flow);
     return *this;
 }
 

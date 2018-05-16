@@ -33,13 +33,13 @@ SCENARIO("Signal flow process", "[signalflow]")
         SignalFlowSession s;
 
         // Create signal flow elements
-        SignalFlow sig1(s, 4, SignalProcessorBuffered(), "Signal 1");
-        SignalFlow sig2(s, 4, SignalProcessorBuffered(), "Signal 2");
-        SignalFlow sig3(s, 4, SignalProcessorBuffered(), "Signal 3");
-        SignalFlow sig4(s, 4, SignalProcessorBuffered(), "Signal 4");
-        SignalFlow sig3a(s,4, SignalProcessorBuffered(), "Signal 3a");
-        SignalFlow sig4a(s,4, SignalProcessorBuffered(), "Signal 4a");
-        SignalFlow sig5(s, 4, SignalProcessorBuffered(), "Signal 5");
+        SignalFlow sig1(&s, 4, SignalProcessorBuffered(), "Signal 1");
+        SignalFlow sig2(&s, 4, SignalProcessorBuffered(), "Signal 2");
+        SignalFlow sig3(&s, 4, SignalProcessorBuffered(), "Signal 3");
+        SignalFlow sig4(&s, 4, SignalProcessorBuffered(), "Signal 4");
+        SignalFlow sig3a(&s,4, SignalProcessorBuffered(), "Signal 3a");
+        SignalFlow sig4a(&s,4, SignalProcessorBuffered(), "Signal 4a");
+        SignalFlow sig5(&s, 4, SignalProcessorBuffered(), "Signal 5");
 
         // Define a signal flow
         sig1 >> sig2.split(sig3)
