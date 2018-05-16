@@ -9,6 +9,7 @@ set(UNIT_TEST_LIST
   multiplier
   signalvector
   signalpipeline
+  signalflow
   signalsplitter)
 
 foreach(NAME IN LISTS UNIT_TEST_LIST)

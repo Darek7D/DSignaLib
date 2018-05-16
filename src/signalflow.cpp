@@ -16,37 +16,26 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/signalprocessorbuffered.h>
-#include <dsignal/signalvector.h>
-#include <catch.hpp>
-#include <memory>
-#include <vector>
-#include <iostream>
+#include <dsignal/signalflow.h>
+#include <dsignal/signalflowsession.h>
+#include <cassert>
 
-using namespace dsignal;
+namespace dsignal {
 
-
-TEST_CASE("Signal pipeline test", "[signalpipeline]")
+SignalFlow::SignalFlow(SignalFlowSession & session, size_t channels, const SignalProcessor &signal_processor, std::string name):
+    SignalVector(channels, signal_processor, name),
+    m_session(session)
 {
-    SignalVector sig1(4, SignalProcessorBuffered(6), "sig1");
-    SignalVector sig2(4, SignalProcessorBuffered(6), "sig2");
-
-    Sample sin(4);
-    sin.set(0, 10);
-    sin.set(1, 11);
-    sin.set(2, 12);
-    sin.set(3, 13);
-
-    Sample sout;
-
-    sin >> sig1 >> sig2 >> sout;
-
-    REQUIRE(sout.get(0)==10);
-    REQUIRE(sout.get(1)==11);
-    REQUIRE(sout.get(2)==12);
-    REQUIRE(sout.get(3)==13);
 }
 
+SignalFlow& SignalFlow::operator>>(SignalFlow& output_flow) {
+    m_session.connect(this, &output_flow);
+    return output_flow;
+}
 
+SignalFlow& SignalFlow::split(SignalFlow &output_flow) {
+    m_session.connect(this, &output_flow);
+    return *this;
+}
 
-
+}

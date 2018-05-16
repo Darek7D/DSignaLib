@@ -48,6 +48,8 @@ set(
     include/dsignal/signalprocessorbuffered.h
     include/dsignal/signalvector.h
     include/dsignal/signalsplitter.h
+    include/dsignal/signalflow.h
+    include/dsignal/signalflowsession.h
     "${CMAKE_BINARY_DIR}/include/dsignal/version.h"
 )
 
