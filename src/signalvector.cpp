@@ -21,6 +21,11 @@
 
 namespace dsignal {
 
+SignalVector::SignalVector():
+    m_name()
+{
+}
+
 SignalVector::SignalVector(size_t channels, const SignalProcessor &signal_processor, std::string name):
     m_name(name)
 {

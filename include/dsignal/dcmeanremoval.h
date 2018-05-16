@@ -43,14 +43,14 @@ namespace dsignal {
  */
 class DSIGNAL_EXPORT DcMeanRemoval: public SignalProcessorBuffered {
 public:
-    DcMeanRemoval(int mean_samples, size_t max_size=1024);
+    DcMeanRemoval(size_t mean_samples=1, size_t max_size=1024);
     DcMeanRemoval(const DcMeanRemoval &s);
     void push(double value) override;
     void reset() override;
     DcMeanRemoval *clone() const override;
 
 private:
-    int m_mean_samples;
+    size_t m_mean_samples;
     double m_current_sum;
     std::deque<double> m_mean_buffer;
 };

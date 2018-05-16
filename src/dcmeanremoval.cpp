@@ -23,9 +23,11 @@
 
 namespace dsignal {
 
+#ifdef USE_FENV_ACCESS
 #pragma STDC FENV_ACCESS ON
+#endif
 
-DcMeanRemoval::DcMeanRemoval(int mean_samples, size_t max_size):
+DcMeanRemoval::DcMeanRemoval(size_t mean_samples, size_t max_size):
     SignalProcessorBuffered(max_size),
     m_mean_samples(mean_samples),
     m_current_sum(0)
@@ -43,7 +45,9 @@ DcMeanRemoval::DcMeanRemoval(const DcMeanRemoval &s):
 
 void DcMeanRemoval::push(double value)
 {
+#ifdef USE_FENV_ACCESS
     std::feclearexcept(FE_ALL_EXCEPT);
+#endif
 
     // Keep no more than m_mean_samples samples
     if (m_mean_buffer.size()>=m_mean_samples) {
@@ -61,6 +65,7 @@ void DcMeanRemoval::push(double value)
     // Store new value in buffer
     SignalProcessorBuffered::push(value-mean);
 
+#ifdef USE_FENV_ACCESS
     // Check computation errors
     if(std::fetestexcept(FE_INVALID	  ))
         throw std::runtime_error("FE_INVALID computation error!");
@@ -70,6 +75,7 @@ void DcMeanRemoval::push(double value)
         throw std::runtime_error("Overflow computation error!");
     if(std::fetestexcept(FE_UNDERFLOW ))
         throw std::runtime_error("Underflow computation error!");
+#endif
 }
 
 void DcMeanRemoval::reset()

@@ -20,9 +20,17 @@
 #include <stdexcept>
 #include <cfenv>
 
+#ifdef USE_FENV_ACCESS
 #pragma STDC FENV_ACCESS ON
+#endif
 
 namespace dsignal {
+
+FilterIir::FilterIir(int max_buffer_size):
+    SignalProcessorBuffered(max_buffer_size)
+{
+
+}
 
 FilterIir::FilterIir(const std::vector<double> &b,
                      const std::vector<double> &a,
@@ -54,8 +62,9 @@ void FilterIir::push(double value)
 
 void FilterIir::process()
 {
+#ifdef USE_FENV_ACCESS
     std::feclearexcept(FE_ALL_EXCEPT);
-
+#endif
     double sum = 0.0;
 
     std::vector<double>::const_iterator b_it = m_b.begin();
@@ -78,6 +87,7 @@ void FilterIir::process()
 
     SignalProcessorBuffered::push(sum);
 
+#ifdef USE_FENV_ACCESS
     if(std::fetestexcept(FE_INVALID	  ))
         throw std::runtime_error("FE_INVALID computation error!");
     if(std::fetestexcept(FE_DIVBYZERO ))
@@ -86,6 +96,7 @@ void FilterIir::process()
         throw std::runtime_error("Overflow computation error!");
     if(std::fetestexcept(FE_UNDERFLOW ))
         throw std::runtime_error("Underflow computation error!");
+#endif
 }
 
 

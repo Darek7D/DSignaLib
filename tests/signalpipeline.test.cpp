@@ -19,11 +19,12 @@
 #include <dsignal/signalprocessorbuffered.h>
 #include <dsignal/signalvector.h>
 #include <catch.hpp>
+#include <memory>
 
 using namespace dsignal;
 
 
-TEST_CASE("signalpipeline testPipeline", "[signalpipeline]")
+TEST_CASE("Signal pipeline test", "[signalpipeline]")
 {
     SignalVector sig1(4, SignalProcessorBuffered(6), "sig1");
     SignalVector sig2(4, SignalProcessorBuffered(6), "sig2");
@@ -43,3 +44,4 @@ TEST_CASE("signalpipeline testPipeline", "[signalpipeline]")
     REQUIRE(sout.get(2)==12);
     REQUIRE(sout.get(3)==13);
 }
+

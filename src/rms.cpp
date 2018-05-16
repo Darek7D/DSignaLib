@@ -23,7 +23,9 @@
 
 namespace dsignal {
 
+#ifdef USE_FENV_ACCESS
 #pragma STDC FENV_ACCESS ON
+#endif
 
 Rms::Rms(size_t dimension):
     SignalProcessorBuffered(dimension)
@@ -40,7 +42,9 @@ Rms::Rms(const Rms &rms):
 
 void Rms::push(double value)
 {
+#ifdef USE_FENV_ACCESS
     std::feclearexcept(FE_ALL_EXCEPT);
+#endif
 
     if (size()>=maxSize())
         m_current_sum-=SignalProcessorBuffered::pop();
@@ -50,6 +54,7 @@ void Rms::push(double value)
     m_current_sum+=new_value;
     m_current_rms = sqrt(m_current_sum/size());
 
+#ifdef USE_FENV_ACCESS
     if(std::fetestexcept(FE_INVALID	  ))
         throw std::runtime_error("FE_INVALID computation error!");
     if(std::fetestexcept(FE_DIVBYZERO ))
@@ -58,6 +63,7 @@ void Rms::push(double value)
         throw std::runtime_error("Overflow computation error!");
     if(std::fetestexcept(FE_UNDERFLOW ))
         throw std::runtime_error("Underflow computation error!");
+#endif
 }
 
 double Rms::pop()

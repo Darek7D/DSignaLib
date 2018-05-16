@@ -35,6 +35,8 @@ namespace dsignal {
 class DSIGNAL_EXPORT FilterIir: public SignalProcessorBuffered
 {
 public:
+    FilterIir(int max_buffer_size=1024);
+
     /**
      * Filter constructor.
      * \param b filter coefficient nominator
@@ -43,6 +45,7 @@ public:
     FilterIir(const std::vector<double> &b,
               const std::vector<double> &a,
               int max_buffer_size=1024);
+
     FilterIir(const FilterIir &filter);
 
     void push(double value) override;

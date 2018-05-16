@@ -16,6 +16,7 @@ configure_file("${CMAKE_SOURCE_DIR}/include/dsignal/version.h.in" "${CMAKE_BINAR
 ##############################################################################
 # Allow the developer to select if Dynamic or Static libraries are built
 OPTION (BUILD_SHARED_LIBS "Build Shared Libraries" ON)
+OPTION (USE_FENV_ACCESS "Use access to floating point environment" ON)
 
 ##############################################################################
 # Setup library type
@@ -24,6 +25,10 @@ SET (LIB_TYPE STATIC)
 IF (BUILD_SHARED_LIBS)
   SET (LIB_TYPE SHARED)
 ENDIF (BUILD_SHARED_LIBS)
+
+IF (USE_FENV_ACCESS)
+add_definitions(-DUSE_FENV_ACCESS)
+ENDIF (USE_FENV_ACCESS)
 
 ##############################################################################
 # Installation 

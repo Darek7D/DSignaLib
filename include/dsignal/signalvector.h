@@ -31,6 +31,7 @@ typedef std::vector<SignalProcessor*> TSignals;
 class DSIGNAL_EXPORT SignalVector
 {
 public:
+    SignalVector();
     SignalVector(size_t channels, const SignalProcessor &signal_processor, std::string name="signal");
     virtual ~SignalVector();
 
@@ -49,7 +50,7 @@ protected:
     std::string m_name;
 };
 
-inline SignalVector& operator>>(Sample& sample, SignalVector& signal)
+inline SignalVector& operator>>(const Sample& sample, SignalVector& signal)
 {
     signal.push(sample);
     return signal;
