@@ -29,7 +29,9 @@ SignalFlow::SignalFlow():
 
 }
 
-SignalFlow::SignalFlow(SignalFlowSession *session, size_t channels, const SignalProcessor &signal_processor, std::string name):
+SignalFlow::SignalFlow(SignalFlowSession *session, size_t channels,
+                       const SignalProcessor &signal_processor,
+                       std::string name=""):
     SignalVector(channels, signal_processor, name),
     m_session(session)
 {

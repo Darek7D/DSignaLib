@@ -39,22 +39,22 @@ void SignalFlowSession::setOutput(SignalFlow& sf, int id){
     m_outputs[id] = &sf;
 }
 
-SignalFlow* SignalFlowSession::input(int id) {
+SignalFlow* SignalFlowSession::input(int id) const {
     return m_inputs.at(id);
 }
 
-SignalFlow* SignalFlowSession::output(int id) {
+SignalFlow* SignalFlowSession::output(int id) const {
     return m_outputs.at(id);
 }
 
-SignalFlow *SignalFlowSession::input()
+SignalFlow *SignalFlowSession::input() const
 {
     if (m_inputs.empty())
         throw std::runtime_error("No inputs defined!");
     return m_inputs.begin()->second;
 }
 
-SignalFlow *SignalFlowSession::output()
+SignalFlow *SignalFlowSession::output() const
 {
     if (m_outputs.empty())
         throw std::runtime_error("No outputs defined!");
@@ -81,7 +81,7 @@ void SignalFlowSession::process() {
     }
 }
 
-std::string SignalFlowSession::dumpGraph()
+std::string SignalFlowSession::dumpGraph() const
 {
     std::stringstream ss;
     ss << "digraph SignalFlow {" << std::endl
@@ -90,32 +90,58 @@ std::string SignalFlowSession::dumpGraph()
 
     for (auto connection: m_signal_connections) {
         for (auto o: connection.second) {
-            ss << "  " << stripStrToDot(connection.first->getName()) << "->"
-               << stripStrToDot(o->getName()) << ";" << std::endl;
+            ss << "  " << makeDotSymbol(connection.first) << "->"
+               << stripStrToDotSymbol(o->getName()) << ";" << std::endl;
         }
     }
     ss << std::endl;
 
+    // Input colors
     for (auto input: m_inputs) {
-        ss << "  " << stripStrToDot(input.second->getName())
+        ss << "  " << makeDotSymbol(input.second)
            << " [shape=box, style=\"filled, rounded\", fillcolor=green];" << std::endl;
     }
 
+    // Output colors
     for (auto input: m_outputs) {
-        ss << "  " << stripStrToDot(input.second->getName())
+        ss << "  " << makeDotSymbol(input.second)
            << " [shape=box, style=\"filled, rounded\", fillcolor=red];" << std::endl;
     }
 
+    // Labels
+    std::unordered_set<SignalFlow*> m_all;
+    for (auto connection: m_signal_connections) {
+        m_all.insert(connection.first);
+        for (auto o: connection.second) {
+            m_all.insert(o);
+        }
+    }
+
+    for (auto connection: m_all) {
+        ss << "  " << makeDotSymbol(connection)
+           << " [label=\"" << connection->getName() << "\"];" << std::endl;
+    }
     ss << "}" << std::endl;
     return ss.str();
 }
 
-std::string SignalFlowSession::stripStrToDot(std::string s)
+std::string SignalFlowSession::makeDotSymbol(const SignalFlow *signalflow) const
+{
+    std::string output = signalflow->getName();
+    output = stripStrToDotSymbol(output);
+    if (output.empty()) {
+        output = std::to_string((size_t)signalflow);
+    }
+    return output;
+}
+
+std::string SignalFlowSession::stripStrToDotSymbol(std::string s) const
 {
     s.erase(std::remove_if(s.begin(),
                            s.end(),
                            [](unsigned char x){return !isalnum(x);}),
                    s.end());
+
     return s;
 }
 

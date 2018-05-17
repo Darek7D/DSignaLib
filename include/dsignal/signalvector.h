@@ -32,7 +32,8 @@ class DSIGNAL_EXPORT SignalVector
 {
 public:
     SignalVector();
-    SignalVector(size_t channels, const SignalProcessor &signal_processor, std::string name="signal");
+    SignalVector(size_t channels, const SignalProcessor &signal_processor,
+                 std::string name="");
     virtual ~SignalVector();
 
     virtual Sample pop();
@@ -41,7 +42,8 @@ public:
     virtual void reset();
     virtual size_t channels() const;
     virtual std::string getName() const;
-    virtual SignalProcessor* getSignalProcessor(size_t channel);
+    virtual SignalProcessor* getSignalProcessor(size_t channel) const;
+
     virtual SignalVector& operator>>(SignalVector& output_signal);
     virtual Sample& operator>>(Sample& output_sample);
 

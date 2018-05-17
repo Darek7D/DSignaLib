@@ -63,25 +63,71 @@ class SignalFlow;
  */
 class DSIGNAL_EXPORT SignalFlowSession {
 public:
+    /**
+     * Make a connection between two SignalFlow's.
+     * All data from input SignalFlow will be transfered to output SignalFlow.
+     */
     virtual void connect(SignalFlow* input, SignalFlow* output);
 
+    /**
+     * Declare the given SignalFlow as input. When you declare the input,
+     * you can access it using the input() method.
+     * The SignalFlow declaration doesn't affect the processing, it is only used
+     * for easy identification by the library user.
+     * \param sf SignalFlow object to declare.
+     * \param id unique identification number for this input.
+     */
     virtual void setInput(SignalFlow& sf, int id=0);
+
+    /**
+     * Declare the given SignalFlow as output. When you declare the output,
+     * you can access it using the output() method.
+     * The SignalFlow declaration doesn't affect the processing, it is only used
+     * for easy identification by the library user.
+     * \param sf SignalFlow object to declare.
+     * \param id unique identification number for this output.
+     */
     virtual void setOutput(SignalFlow& sf, int id=0);
 
-    virtual SignalFlow* input(int id);
-    virtual SignalFlow* output(int id);
-    virtual SignalFlow* input();
-    virtual SignalFlow* output();
+    /**
+     * Returns the SignalFlow object declared by setInput() method
+     * \param id unique identification number defined by setInput() method.
+     */
+    virtual SignalFlow* input(int id) const;
 
+    /**
+     * Returns the SignalFlow object declared by setOutput() method
+     * \param id unique identification number defined by setOutput() method.
+     */
+    virtual SignalFlow* output(int id) const;
+
+    /**
+     * \copybrief SignalFlowSession::input()
+     */
+    virtual SignalFlow* input() const;
+
+    /**
+     * \copybrief SignalFlowSession::output()
+     */
+    virtual SignalFlow* output() const;
+
+    /**
+     * Runs the processing of all buffered data in SignalFlow objects.
+     */
     virtual void process();
-    virtual std::string dumpGraph();
+
+    /**
+     * Dump the graph of all connections in Graphvis format.
+     */
+    virtual std::string dumpGraph() const;
 
 private:
     std::unordered_map<SignalFlow*, std::vector<SignalFlow*>> m_signal_connections;
     std::unordered_map<int, SignalFlow*> m_inputs;
     std::unordered_map<int, SignalFlow*> m_outputs;
 
-    std::string stripStrToDot(std::string s);
+    std::string makeDotSymbol(const SignalFlow* signalflow) const;
+    std::string stripStrToDotSymbol(std::string s) const;
 };
 
 }

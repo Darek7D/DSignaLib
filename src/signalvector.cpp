@@ -78,7 +78,7 @@ std::string SignalVector::getName() const
     return m_name;
 }
 
-SignalProcessor *SignalVector::getSignalProcessor(size_t channel)
+SignalProcessor *SignalVector::getSignalProcessor(size_t channel) const
 {
     return m_signals.at(channel);
 }
