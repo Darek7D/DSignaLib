@@ -60,8 +60,6 @@ SCENARIO("Signal flow process", "[signalflow]")
         sample.set(2, 12);
         sample.set(3, 13);
 
-        std::cout << s.dumpGraph();
-
         REQUIRE(sig1.has() == false);
         REQUIRE(sig2.has() == false);
         REQUIRE(sig3.has() == false);

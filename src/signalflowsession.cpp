@@ -66,7 +66,7 @@ void SignalFlowSession::process() {
     while (finished==false) {
         finished = true;
         for (auto pair: m_signal_connections) {
-            if (pair.first->has()) {
+            while (pair.first->has()) {
                 // Pop the sample from input connection
                 Sample s = pair.first->pop();
 
