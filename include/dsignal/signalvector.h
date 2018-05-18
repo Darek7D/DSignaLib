@@ -34,7 +34,10 @@ public:
     SignalVector();
     SignalVector(size_t channels, const SignalProcessor &signal_processor,
                  std::string name="");
+    SignalVector(const SignalVector& signal_vector);
     virtual ~SignalVector();
+
+    virtual SignalVector & operator=(const SignalVector &signal_vector);
 
     virtual Sample pop();
     virtual bool has() const;

@@ -33,10 +33,32 @@ SignalVector::SignalVector(size_t channels, const SignalProcessor &signal_proces
         m_signals.push_back(signal_processor.clone());
 }
 
+SignalVector::SignalVector(const SignalVector &signal_vector)
+{
+    m_name = signal_vector.m_name;
+    for (size_t i=0; i<signal_vector.channels(); i++)
+        m_signals.push_back(signal_vector.m_signals.at(i)->clone());
+}
+
 SignalVector::~SignalVector()
 {
     for (auto s: m_signals)
         delete s;
+}
+
+SignalVector & SignalVector::operator=(const SignalVector &signal_vector)
+{
+    if(this == &signal_vector)
+        return *this;
+
+    for (auto s: m_signals)
+        delete s;
+
+    m_name = signal_vector.m_name;
+    for (size_t i=0; i<signal_vector.channels(); i++)
+        m_signals.push_back(signal_vector.m_signals.at(i)->clone());
+
+    return *this;
 }
 
 Sample SignalVector::pop()
