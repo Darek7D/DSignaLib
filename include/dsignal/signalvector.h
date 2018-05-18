@@ -23,6 +23,7 @@
 #include "signalprocessor.h"
 #include "dsignal_export.h"
 #include <string>
+#include <mutex>
 
 namespace dsignal {
 
@@ -43,6 +44,8 @@ public:
     virtual bool has() const;
     virtual void push(const Sample &sample);
     virtual void reset();
+    virtual void enable(bool enable=true);
+    virtual bool enabled();
     virtual size_t channels() const;
     virtual std::string getName() const;
     virtual SignalProcessor* getSignalProcessor(size_t channel) const;
@@ -53,6 +56,8 @@ public:
 protected:
     TSignals m_signals;
     std::string m_name;
+    mutable std::mutex m_mutex;
+    bool m_enabled;
 };
 
 inline SignalVector& operator>>(const Sample& sample, SignalVector& signal)

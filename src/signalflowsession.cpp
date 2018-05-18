@@ -104,8 +104,8 @@ std::string SignalFlowSession::dumpGraph() const
 
     // Output colors
     for (auto input: m_outputs) {
-        ss << "  " << makeDotSymbol(input.second)
-           << " [shape=box, style=\"filled, rounded\", fillcolor=red];" << std::endl;
+        ss << "  " << makeDotSymbol(input.second);
+        ss << " [shape=box, style=\"filled, rounded\", fillcolor=" << (input.second->enabled()?"red":"gray") <<"];" << std::endl;
     }
 
     // Labels

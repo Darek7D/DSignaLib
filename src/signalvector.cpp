@@ -22,12 +22,14 @@
 namespace dsignal {
 
 SignalVector::SignalVector():
-    m_name()
+    m_name(),
+    m_enabled(true)
 {
 }
 
 SignalVector::SignalVector(size_t channels, const SignalProcessor &signal_processor, std::string name):
-    m_name(name)
+    m_name(name),
+    m_enabled(true)
 {
     for (size_t i=0; i<channels; i++)
         m_signals.push_back(signal_processor.clone());
@@ -36,6 +38,7 @@ SignalVector::SignalVector(size_t channels, const SignalProcessor &signal_proces
 SignalVector::SignalVector(const SignalVector &signal_vector)
 {
     m_name = signal_vector.m_name;
+    m_enabled = signal_vector.m_enabled;
     for (size_t i=0; i<signal_vector.channels(); i++)
         m_signals.push_back(signal_vector.m_signals.at(i)->clone());
 }
@@ -55,6 +58,8 @@ SignalVector & SignalVector::operator=(const SignalVector &signal_vector)
         delete s;
 
     m_name = signal_vector.m_name;
+    m_enabled = signal_vector.m_enabled;
+
     for (size_t i=0; i<signal_vector.channels(); i++)
         m_signals.push_back(signal_vector.m_signals.at(i)->clone());
 
@@ -63,6 +68,8 @@ SignalVector & SignalVector::operator=(const SignalVector &signal_vector)
 
 Sample SignalVector::pop()
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
+
     Sample s(channels());
     for (size_t c=0; c<m_signals.size(); c++)
         s.set(c, m_signals.at(c)->pop());
@@ -72,6 +79,8 @@ Sample SignalVector::pop()
 
 bool SignalVector::has() const
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
+
     for (auto s: m_signals)
         return s->has();
     return false;
@@ -79,15 +88,32 @@ bool SignalVector::has() const
 
 void SignalVector::push(const Sample &sample)
 {
-    assert(sample.channels()==channels());
-    for (size_t c=0; c<channels(); c++)
-        m_signals.at(c)->push(sample.get(c));
+    if (m_enabled) {
+        std::lock_guard<std::mutex> guard(m_mutex);
+
+        assert(sample.channels()==channels());
+        for (size_t c=0; c<channels(); c++)
+            m_signals.at(c)->push(sample.get(c));
+    }
 }
 
 void SignalVector::reset()
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
+
+    m_enabled = true;
     for (auto s: m_signals)
         return s->reset();
+}
+
+void SignalVector::enable(bool enable)
+{
+    m_enabled = enable;
+}
+
+bool SignalVector::enabled()
+{
+    return m_enabled;
 }
 
 size_t SignalVector::channels() const
