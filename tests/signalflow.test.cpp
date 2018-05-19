@@ -85,5 +85,26 @@ SCENARIO("Signal flow process", "[signalflow]")
                 REQUIRE(sig5.has() == false);
             }
         }
+
+        WHEN("Push more samples") {
+            for (int i=0; i<100; i++)
+                s.input()->push(sample);
+            s.process();
+            THEN("Output signals have values") {
+                for (int i=0; i<100; i++) {
+                    REQUIRE(s.output(0)->pop().get(0)==10);
+                    REQUIRE(s.output(1)->pop().get(0)==10);
+                    REQUIRE(s.output(2)->pop().get(0)==10);
+                }
+
+                REQUIRE(sig1.has() == false);
+                REQUIRE(sig2.has() == false);
+                REQUIRE(sig3.has() == false);
+                REQUIRE(sig4.has() == false);
+                REQUIRE(sig3a.has()== false);
+                REQUIRE(sig4a.has()== false);
+                REQUIRE(sig5.has() == false);
+            }
+        }
     }
 }
