@@ -33,13 +33,13 @@ SCENARIO("Signal flow process", "[signalflow]")
         SignalFlowSession s;
 
         // Create signal flow elements
-        SignalFlow sig1(&s, 4, SignalProcessorBuffered(), "Signal 1");
-        SignalFlow sig2(&s, 4, SignalProcessorBuffered(), "Signal 2");
-        SignalFlow sig3(&s, 4, SignalProcessorBuffered(), "Signal 3");
-        SignalFlow sig4(&s, 4, SignalProcessorBuffered(), "Signal 4");
-        SignalFlow sig3a(&s,4, SignalProcessorBuffered(), "Signal 3a");
-        SignalFlow sig4a(&s,4, SignalProcessorBuffered(), "Signal 4a");
-        SignalFlow sig5(&s, 4, SignalProcessorBuffered(), "Signal 5");
+        SignalFlow sig1(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 1"));
+        SignalFlow sig2(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 2"));
+        SignalFlow sig3(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 3"));
+        SignalFlow sig4(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 4"));
+        SignalFlow sig3a(&s,SignalVector(4, SignalProcessorBuffered(), "Signal 3a"));
+        SignalFlow sig4a(&s,SignalVector(4, SignalProcessorBuffered(), "Signal 4a"));
+        SignalFlow sig5(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 5"));
 
         // Define a signal flow
         sig1 >> sig2.split(sig3)
@@ -60,14 +60,6 @@ SCENARIO("Signal flow process", "[signalflow]")
         sample.set(2, 12);
         sample.set(3, 13);
 
-        REQUIRE(sig1.has() == false);
-        REQUIRE(sig2.has() == false);
-        REQUIRE(sig3.has() == false);
-        REQUIRE(sig4.has() == false);
-        REQUIRE(sig3a.has()== false);
-        REQUIRE(sig4a.has()== false);
-        REQUIRE(sig5.has() == false);
-
         WHEN("Push the sample") {
             s.input()->push(sample);
             s.process();
@@ -75,14 +67,6 @@ SCENARIO("Signal flow process", "[signalflow]")
                 REQUIRE(s.output(0)->pop().get(0)==10);
                 REQUIRE(s.output(1)->pop().get(0)==10);
                 REQUIRE(s.output(2)->pop().get(0)==10);
-
-                REQUIRE(sig1.has() == false);
-                REQUIRE(sig2.has() == false);
-                REQUIRE(sig3.has() == false);
-                REQUIRE(sig4.has() == false);
-                REQUIRE(sig3a.has()== false);
-                REQUIRE(sig4a.has()== false);
-                REQUIRE(sig5.has() == false);
             }
         }
 
@@ -96,14 +80,6 @@ SCENARIO("Signal flow process", "[signalflow]")
                     REQUIRE(s.output(1)->pop().get(0)==10);
                     REQUIRE(s.output(2)->pop().get(0)==10);
                 }
-
-                REQUIRE(sig1.has() == false);
-                REQUIRE(sig2.has() == false);
-                REQUIRE(sig3.has() == false);
-                REQUIRE(sig4.has() == false);
-                REQUIRE(sig3a.has()== false);
-                REQUIRE(sig4a.has()== false);
-                REQUIRE(sig5.has() == false);
             }
         }
     }

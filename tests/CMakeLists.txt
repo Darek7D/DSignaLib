@@ -8,6 +8,7 @@ set(UNIT_TEST_LIST
   rms
   multiplier
   signalvector
+  signalvectormixer
   signalpipeline
   signalflow
   signalsplitter)

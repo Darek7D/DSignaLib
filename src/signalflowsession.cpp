@@ -39,26 +39,26 @@ void SignalFlowSession::setOutput(SignalFlow& sf, int id){
     m_outputs[id] = &sf;
 }
 
-SignalFlow* SignalFlowSession::input(int id) const {
-    return m_inputs.at(id);
+SignalVector *SignalFlowSession::input(int id) const {
+    return m_inputs.at(id)->m_vector;
 }
 
-SignalFlow* SignalFlowSession::output(int id) const {
-    return m_outputs.at(id);
+SignalVector *SignalFlowSession::output(int id) const {
+    return m_outputs.at(id)->m_vector;
 }
 
-SignalFlow *SignalFlowSession::input() const
+SignalVector *SignalFlowSession::input() const
 {
     if (m_inputs.empty())
         throw std::runtime_error("No inputs defined!");
-    return m_inputs.begin()->second;
+    return m_inputs.begin()->second->m_vector;
 }
 
-SignalFlow *SignalFlowSession::output() const
+SignalVector *SignalFlowSession::output() const
 {
     if (m_outputs.empty())
         throw std::runtime_error("No outputs defined!");
-    return m_outputs.begin()->second;
+    return m_outputs.begin()->second->m_vector;
 }
 
 void SignalFlowSession::process() {
@@ -66,13 +66,13 @@ void SignalFlowSession::process() {
     while (finished==false) {
         finished = true;
         for (auto pair: m_signal_connections) {
-            while (pair.first->has()) {
+            while (pair.first->m_vector->has()) {
                 // Pop the sample from input connection
-                Sample s = pair.first->pop();
+                Sample s = pair.first->m_vector->pop();
 
                 // And push it to output connections
                 for (auto o: pair.second)
-                    o->push(s);
+                    o->m_vector->push(s);
 
                 // Inform that we havn't finished yet
                 finished = false;
@@ -91,7 +91,7 @@ std::string SignalFlowSession::dumpGraph() const
     for (auto connection: m_signal_connections) {
         for (auto o: connection.second) {
             ss << "  " << makeDotSymbol(connection.first) << "->"
-               << stripStrToDotSymbol(o->getName()) << ";" << std::endl;
+               << stripStrToDotSymbol(o->m_vector->getName()) << ";" << std::endl;
         }
     }
     ss << std::endl;
@@ -105,7 +105,7 @@ std::string SignalFlowSession::dumpGraph() const
     // Output colors
     for (auto input: m_outputs) {
         ss << "  " << makeDotSymbol(input.second);
-        ss << " [shape=box, style=\"filled, rounded\", fillcolor=" << (input.second->enabled()?"red":"gray") <<"];" << std::endl;
+        ss << " [shape=box, style=\"filled, rounded\", fillcolor=" << (input.second->m_vector->enabled()?"red":"gray") <<"];" << std::endl;
     }
 
     // Labels
@@ -119,7 +119,7 @@ std::string SignalFlowSession::dumpGraph() const
 
     for (auto connection: m_all) {
         ss << "  " << makeDotSymbol(connection)
-           << " [label=\"" << connection->getName() << "\"];" << std::endl;
+           << " [label=\"" << connection->m_vector->getName() << "\"];" << std::endl;
     }
     ss << "}" << std::endl;
     return ss.str();
@@ -127,7 +127,7 @@ std::string SignalFlowSession::dumpGraph() const
 
 std::string SignalFlowSession::makeDotSymbol(const SignalFlow *signalflow) const
 {
-    std::string output = signalflow->getName();
+    std::string output = signalflow->m_vector->getName();
     output = stripStrToDotSymbol(output);
     if (output.empty()) {
         output = std::to_string((size_t)signalflow);

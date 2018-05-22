@@ -16,50 +16,14 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/sample.h>
+#include <dsignal/mixeroperationsubtract.h>
 
 namespace dsignal {
 
-Sample::Sample()
+double MixerOperationSubtract::operate(const double a, const double b)
 {
-
+    return a - b;
 }
-
-Sample::Sample(int channels)
-{
-    m_values.resize(channels, 0.0);
-}
-
-Sample::Sample(const std::vector<double> &values)
-{
-    m_values = values;
-}
-
-Sample::Sample(const Sample &sample)
-{
-    m_values = sample.m_values;
-}
-
-Sample::~Sample()
-{
-
-}
-
-double Sample::get(size_t channel) const
-{
-    return m_values.at(channel);
-}
-
-void Sample::set(size_t channel, double value)
-{
-    m_values.at(channel) = value;
-}
-
-size_t Sample::channels() const
-{
-    return m_values.size();
-}
-
 
 }
 

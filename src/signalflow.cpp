@@ -23,34 +23,51 @@
 namespace dsignal {
 
 SignalFlow::SignalFlow():
-    SignalVector(),
-    m_session(nullptr)
+    m_session(nullptr),
+    m_vector(nullptr)
 {
 
 }
 
-SignalFlow::SignalFlow(SignalFlowSession *session, size_t channels,
-                       const SignalProcessor &signal_processor,
-                       std::string name=""):
-    SignalVector(channels, signal_processor, name),
-    m_session(session)
+SignalFlow::SignalFlow(SignalFlowSession *session, const SignalVector &signal_vector):
+    m_session(session),
+    m_vector(new SignalVector(signal_vector))
 {
+}
+
+SignalFlow::~SignalFlow()
+{
+    if (m_vector!=nullptr)
+        delete m_vector;
 }
 
 SignalFlow& SignalFlow::operator>>(SignalFlow& output_flow) {
     if (m_session==nullptr)
-        throw std::runtime_error("No session defined!");
+        throw std::runtime_error("No SignalFlowSession defined!");
+
+    if (m_vector==nullptr)
+        throw std::runtime_error("No SignalVector defined!");
 
     m_session->connect(this, &output_flow);
+
     return output_flow;
 }
 
 SignalFlow& SignalFlow::split(SignalFlow &output_flow) {
     if (m_session==nullptr)
-        throw std::runtime_error("No session defined!");
+        throw std::runtime_error("No SignalFlowSession defined!");
+
+    if (m_vector==nullptr)
+        throw std::runtime_error("No SignalVector defined!");
 
     m_session->connect(this, &output_flow);
+
     return *this;
 }
+
+/*SignalVector SignalFlow::vector()
+{
+    return m_vector;
+}*/
 
 }

@@ -21,6 +21,7 @@
 
 #include "dsignal_export.h"
 #include "sample.h"
+#include "signalvector.h"
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
@@ -93,23 +94,23 @@ public:
      * Returns the SignalFlow object declared by setInput() method
      * \param id unique identification number defined by setInput() method.
      */
-    virtual SignalFlow* input(int id) const;
+    virtual SignalVector* input(int id) const;
 
     /**
      * Returns the SignalFlow object declared by setOutput() method
      * \param id unique identification number defined by setOutput() method.
      */
-    virtual SignalFlow* output(int id) const;
+    virtual SignalVector* output(int id) const;
 
     /**
      * \copybrief SignalFlowSession::input()
      */
-    virtual SignalFlow* input() const;
+    virtual SignalVector* input() const;
 
     /**
      * \copybrief SignalFlowSession::output()
      */
-    virtual SignalFlow* output() const;
+    virtual SignalVector* output() const;
 
     /**
      * Runs the processing of all buffered data in SignalFlow objects.

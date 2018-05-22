@@ -5,8 +5,8 @@ set (CMAKE_CXX_STANDARD 11)
 ##############################################################################
 # LIBRARY VERSION
 ##############################################################################
-SET (DSIGNAL_VERSION_MAJOR 1)
-SET (DSIGNAL_VERSION_MINOR 0)
+SET (DSIGNAL_VERSION_MAJOR 0)
+SET (DSIGNAL_VERSION_MINOR 1)
 SET (DSIGNAL_VERSION_FIX 0)
 
 configure_file("${CMAKE_SOURCE_DIR}/include/dsignal/version.h.in" "${CMAKE_BINARY_DIR}/include/dsignal/version.h" @ONLY)
@@ -47,6 +47,9 @@ set(
     include/dsignal/signalprocessorsimple.h
     include/dsignal/signalprocessorbuffered.h
     include/dsignal/signalvector.h
+    include/dsignal/signalvectormixer.h
+    include/dsignal/mixeroperation.h
+    include/dsignal/mixeroperationsubtract.h
     include/dsignal/signalsplitter.h
     include/dsignal/signalflow.h
     include/dsignal/signalflowsession.h

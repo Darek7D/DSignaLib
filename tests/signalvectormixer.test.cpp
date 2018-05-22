@@ -16,50 +16,25 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <dsignal/sample.h>
+#include <dsignal/signalvector.h>
+#include <dsignal/signalvectormixer.h>
+#include <dsignal/signalprocessorbuffered.h>
+#include <dsignal/mixeroperationsubtract.h>
+#include <catch.hpp>
 
-namespace dsignal {
+using namespace dsignal;
 
-Sample::Sample()
+SCENARIO("signalvectormixer push pop test", "[signalvectormixer]")
 {
+    SignalVector in(4, SignalProcessorBuffered());
+    SignalVectorMixer mixer({{0,1}, {2,3}}, new MixerOperationSubtract());
+    SignalVector out(2, SignalProcessorBuffered());
 
+    Sample sample_in({1,2,3,4});
+    Sample sample_out(2);
+
+    sample_in >> in >> mixer >> out >> sample_out;
+
+    REQUIRE(sample_out.get(0)==-1);
+    REQUIRE(sample_out.get(1)==-1);
 }
-
-Sample::Sample(int channels)
-{
-    m_values.resize(channels, 0.0);
-}
-
-Sample::Sample(const std::vector<double> &values)
-{
-    m_values = values;
-}
-
-Sample::Sample(const Sample &sample)
-{
-    m_values = sample.m_values;
-}
-
-Sample::~Sample()
-{
-
-}
-
-double Sample::get(size_t channel) const
-{
-    return m_values.at(channel);
-}
-
-void Sample::set(size_t channel, double value)
-{
-    m_values.at(channel) = value;
-}
-
-size_t Sample::channels() const
-{
-    return m_values.size();
-}
-
-
-}
-

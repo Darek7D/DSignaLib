@@ -17,6 +17,8 @@ set(
       signalprocessorsimple.cpp
       signalprocessorbuffered.cpp
       signalvector.cpp
+      signalvectormixer.cpp
+      mixeroperationsubtract.cpp
       signalflow.cpp
       signalflowsession.cpp
       signalsplitter.cpp

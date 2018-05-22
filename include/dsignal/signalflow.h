@@ -44,6 +44,7 @@ class SignalFlowSession;
  * s1 >> s2 >> s2;
  *
  * // Splitting
+ * // Method #1
  * SignalFlow s1(...);
  * SignalFlow s2(...);
  * SignalFlow s3(...);
@@ -52,21 +53,33 @@ class SignalFlowSession;
  * SignalFlow s6(...);
  *
  * s1 >> s2 >> s3.split(s4).split(s5);
+ * // further processing
+ * s4 >> s6;
+ *
+ * // Method #2
+ * s1 >> s2 >> s3;
+ * s3 >> s4;
+ * s3 >> s5;
+ * // further processing
  * s4 >> s6;
  *
  * \endcode
  */
-class DSIGNAL_EXPORT SignalFlow: public SignalVector {
+class DSIGNAL_EXPORT SignalFlow {
 public:
     SignalFlow();
-    SignalFlow(SignalFlowSession *session, size_t channels,
-               const SignalProcessor &signal_processor, std::string name);
+    SignalFlow(SignalFlowSession *session, const SignalVector &signal_vector);
+    virtual ~SignalFlow();
 
     virtual SignalFlow& operator>>(SignalFlow& output_flow);
     virtual SignalFlow& split(SignalFlow &output_flow);
+    //virtual SignalVector vector();
 
 private:
     SignalFlowSession *m_session;
+    SignalVector *m_vector;
+
+    friend class SignalFlowSession;
 };
 
 }

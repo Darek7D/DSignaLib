@@ -131,6 +131,8 @@ public:
 
 protected:
     TSignals m_signals;
+
+private:
     std::string m_name;
     mutable std::mutex m_mutex;
     bool m_enabled;
