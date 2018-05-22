@@ -121,6 +121,11 @@ size_t SignalVector::channels() const
     return m_signals.size();
 }
 
+void SignalVector::setName(const std::string &name)
+{
+    m_name = name;
+}
+
 std::string SignalVector::getName() const
 {
     return m_name;
