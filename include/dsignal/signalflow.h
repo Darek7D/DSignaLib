@@ -68,12 +68,13 @@ class SignalFlowSession;
 class DSIGNAL_EXPORT SignalFlow {
 public:
     SignalFlow();
+    SignalFlow(const SignalFlow& signal_flow);
     SignalFlow(SignalFlowSession *session, const SignalVector &signal_vector);
     virtual ~SignalFlow();
 
-    virtual SignalFlow& operator>>(SignalFlow& output_flow);
-    virtual SignalFlow& split(SignalFlow &output_flow);
-    //virtual SignalVector vector();
+    virtual SignalFlow & operator=(const SignalFlow &signal_flow);
+    virtual SignalFlow & operator>>(SignalFlow &output_flow);
+    virtual SignalFlow & split(SignalFlow &output_flow);
 
 private:
     SignalFlowSession *m_session;

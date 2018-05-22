@@ -35,10 +35,31 @@ SignalFlow::SignalFlow(SignalFlowSession *session, const SignalVector &signal_ve
 {
 }
 
+SignalFlow::SignalFlow(const SignalFlow &signal_flow):
+    m_session(signal_flow.m_session),
+    m_vector(new SignalVector(*signal_flow.m_vector))
+{
+
+}
+
 SignalFlow::~SignalFlow()
 {
     if (m_vector!=nullptr)
         delete m_vector;
+}
+
+SignalFlow &SignalFlow::operator=(const SignalFlow &signal_flow)
+{
+    if(this == &signal_flow)
+        return *this;
+
+    if (m_vector!=nullptr)
+        delete m_vector;
+
+    m_session = signal_flow.m_session;
+    m_vector = new SignalVector(*signal_flow.m_vector);
+
+    return *this;
 }
 
 SignalFlow& SignalFlow::operator>>(SignalFlow& output_flow) {
@@ -64,10 +85,5 @@ SignalFlow& SignalFlow::split(SignalFlow &output_flow) {
 
     return *this;
 }
-
-/*SignalVector SignalFlow::vector()
-{
-    return m_vector;
-}*/
 
 }

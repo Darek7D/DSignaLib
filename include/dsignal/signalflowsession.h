@@ -64,6 +64,8 @@ class SignalFlow;
  */
 class DSIGNAL_EXPORT SignalFlowSession {
 public:
+    virtual ~SignalFlowSession(){}
+
     /**
      * Make a connection between two SignalFlow's.
      * All data from input SignalFlow will be transfered to output SignalFlow.
