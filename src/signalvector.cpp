@@ -88,11 +88,12 @@ bool SignalVector::has() const
 
 void SignalVector::push(const Sample &sample)
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
     if (m_enabled) {
         try {
-            std::lock_guard<std::mutex> guard(m_mutex);
+            if (sample.channels()!=channels())
+                throw std::runtime_error("Not compatible sample pushed (wrong number of channels)!");
 
-            assert(sample.channels()==channels());
             for (size_t c=0; c<channels(); c++)
                 m_signals.at(c)->push(sample.get(c));
         } catch (std::exception &e) {
@@ -115,6 +116,7 @@ void SignalVector::reset()
 
 void SignalVector::enable(bool enable)
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
     m_enabled = enable;
 }
 

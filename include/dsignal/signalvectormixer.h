@@ -49,7 +49,7 @@ public:
      * Pushes a Sample to SignalVector. Each channel Sample channel will be splitted
      * and pushed separately to the internal SignalProcessor's.
      */
-    virtual void push(const Sample &sample);
+    void push(const Sample &sample) override;
 
 protected:
     SignalProcessorMixerMatrix m_mixer_matrix;
