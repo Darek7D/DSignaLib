@@ -17,6 +17,7 @@
  */
 
 #include <dsignal/signalflow.h>
+#include <dsignal/signalvector.h>
 #include <dsignal/signalflowsession.h>
 #include <cassert>
 
@@ -84,6 +85,11 @@ SignalFlow& SignalFlow::split(SignalFlow &output_flow) {
     m_session->connect(this, &output_flow);
 
     return *this;
+}
+
+SignalVector* SignalFlow::vector()
+{
+    return m_vector;
 }
 
 }

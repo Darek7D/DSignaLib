@@ -76,6 +76,8 @@ public:
     virtual SignalFlow & operator>>(SignalFlow &output_flow);
     virtual SignalFlow & split(SignalFlow &output_flow);
 
+    virtual SignalVector * vector();
+
 private:
     SignalFlowSession *m_session;
     SignalVector *m_vector;

@@ -70,13 +70,13 @@ void FilterFir::process()
 
 #ifdef USE_FENV_ACCESS
     if(std::fetestexcept(FE_INVALID	  ))
-        throw std::runtime_error("FE_INVALID computation error!");
+        throw std::runtime_error("FilterFir::process(): FE_INVALID computation error!");
     if(std::fetestexcept(FE_DIVBYZERO ))
-        throw std::runtime_error("Divide by zero!");
+        throw std::runtime_error("FilterFir::process(): Divide by zero!");
     if(std::fetestexcept(FE_OVERFLOW  ))
-        throw std::runtime_error("Overflow computation error!");
+        throw std::runtime_error("FilterFir::process(): Overflow computation error!");
     if(std::fetestexcept(FE_UNDERFLOW ))
-        throw std::runtime_error("Underflow computation error!");
+        throw std::runtime_error("FilterFir::process(): Underflow computation error!");
 #endif
 }
 

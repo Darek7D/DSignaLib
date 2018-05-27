@@ -39,7 +39,11 @@ FilterIir::FilterIir(const std::vector<double> &b,
     m_b(b),
     m_a(a)
 {
+    if (m_b.size()!=m_a.size())
+        throw std::invalid_argument("The size of coefficients is different!");
 
+    m_filter_buffer.resize(m_a.size(), 0);
+    m_filter_feedback.resize(m_a.size(), 0);
 }
 
 FilterIir::FilterIir(const FilterIir &filter):
@@ -53,10 +57,8 @@ FilterIir::FilterIir(const FilterIir &filter):
 
 void FilterIir::push(double value)
 {
-    m_filter_buffer.push_back(value);
-    if (m_filter_buffer.size()>m_a.size())
-        m_filter_buffer.pop_front();
-
+    m_filter_buffer.push_front(value);
+    m_filter_buffer.pop_back();
     process();
 }
 
@@ -67,23 +69,13 @@ void FilterIir::process()
 #endif
     double sum = 0.0;
 
-    std::vector<double>::const_iterator b_it = m_b.begin();
-    for (double v: m_filter_buffer) {
-        sum += v * (*b_it);
-        ++b_it;
-    }
+    m_filter_feedback.pop_back();
 
-    std::vector<double>::const_iterator a_it = m_a.begin()+1;
-    for (std::deque<double>::const_iterator it = m_filter_buffer.begin()+1;
-         it!=m_filter_buffer.end();
-         ++it) {
-        sum -= (*it)*(*a_it);
-        ++a_it;
-    }
+    sum = m_filter_buffer[0] * m_b[0];
+    for (size_t i=1; i<m_filter_buffer.size(); i++)
+        sum += (m_filter_buffer[i] * m_b[i]) - (m_filter_feedback[i-1] * m_a[i]);
 
-    m_filter_feedback.push_back(sum);
-    if (m_filter_feedback.size()>m_a.size())
-        m_filter_feedback.pop_front();
+    m_filter_feedback.push_front(sum);
 
     SignalProcessorBuffered::push(sum);
 
@@ -107,6 +99,9 @@ void FilterIir::reset()
     std::swap(m_filter_buffer, empty1);
     std::deque<double> empty2;
     std::swap(m_filter_feedback, empty2);
+
+    m_filter_buffer.resize(m_a.size(), 0);
+    m_filter_feedback.resize(m_a.size(), 0);
 }
 
 FilterIir *FilterIir::clone() const

@@ -89,11 +89,18 @@ bool SignalVector::has() const
 void SignalVector::push(const Sample &sample)
 {
     if (m_enabled) {
-        std::lock_guard<std::mutex> guard(m_mutex);
+        try {
+            std::lock_guard<std::mutex> guard(m_mutex);
 
-        assert(sample.channels()==channels());
-        for (size_t c=0; c<channels(); c++)
-            m_signals.at(c)->push(sample.get(c));
+            assert(sample.channels()==channels());
+            for (size_t c=0; c<channels(); c++)
+                m_signals.at(c)->push(sample.get(c));
+        } catch (std::exception &e) {
+            std::string s;
+            s = e.what();
+            s += ". " + getName();
+            throw std::runtime_error(s);
+        }
     }
 }
 
