@@ -51,11 +51,14 @@ public:
      */
     void push(const Sample &sample) override;
 
+    SignalVectorMixer* clone() const override;
+
+    void setMixerMatrix(const SignalProcessorMixerMatrix &mixer_matrix);
+
 protected:
     SignalProcessorMixerMatrix m_mixer_matrix;
     MixerOperation *m_mixer_operation;
     mutable std::mutex m_mixer_mutex;
-
 };
 
 

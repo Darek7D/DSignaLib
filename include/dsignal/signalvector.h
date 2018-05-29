@@ -80,6 +80,11 @@ public:
     virtual void reset();
 
     /**
+     * Clones the SignalVector object.
+     */
+    virtual SignalVector *clone() const;
+
+    /**
      * Enables or disables the SignalVector. If disabled, any pushed Sample
      * will be ignored.
      */

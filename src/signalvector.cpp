@@ -114,6 +114,11 @@ void SignalVector::reset()
         return s->reset();
 }
 
+SignalVector *SignalVector::clone() const
+{
+    return new SignalVector(*this);
+}
+
 void SignalVector::enable(bool enable)
 {
     std::lock_guard<std::mutex> guard(m_mutex);

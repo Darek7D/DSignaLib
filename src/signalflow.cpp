@@ -27,20 +27,18 @@ SignalFlow::SignalFlow():
     m_session(nullptr),
     m_vector(nullptr)
 {
-
 }
 
 SignalFlow::SignalFlow(SignalFlowSession *session, const SignalVector &signal_vector):
     m_session(session),
-    m_vector(new SignalVector(signal_vector))
+    m_vector(signal_vector.clone())
 {
 }
 
 SignalFlow::SignalFlow(const SignalFlow &signal_flow):
     m_session(signal_flow.m_session),
-    m_vector(new SignalVector(*signal_flow.m_vector))
+    m_vector(signal_flow.m_vector->clone())
 {
-
 }
 
 SignalFlow::~SignalFlow()
@@ -58,7 +56,7 @@ SignalFlow &SignalFlow::operator=(const SignalFlow &signal_flow)
         delete m_vector;
 
     m_session = signal_flow.m_session;
-    m_vector = new SignalVector(*signal_flow.m_vector);
+    m_vector = signal_flow.m_vector->clone();
 
     return *this;
 }

@@ -70,4 +70,14 @@ void SignalVectorMixer::push(const Sample &sample)
     }
 }
 
+SignalVectorMixer *SignalVectorMixer::clone() const
+{
+    return new SignalVectorMixer(*this);
+}
+
+void SignalVectorMixer::setMixerMatrix(const SignalProcessorMixerMatrix &mixer_matrix)
+{
+    m_mixer_matrix = mixer_matrix;
+}
+
 }
