@@ -17,6 +17,7 @@ configure_file("${CMAKE_SOURCE_DIR}/include/dsignal/version.h.in" "${CMAKE_BINAR
 # Allow the developer to select if Dynamic or Static libraries are built
 OPTION (BUILD_SHARED_LIBS "Build Shared Libraries" ON)
 OPTION (USE_FENV_ACCESS "Use access to floating point environment" ON)
+OPTION (TESTS_ENABLED "Tests enabled" OFF)
 
 ##############################################################################
 # Setup library type
@@ -107,4 +108,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 ##############################################################################
 # Testing
 ##############################################################################
+IF(TESTS_ENABLED)
 add_subdirectory(${PROJECT_SOURCE_DIR}/tests)
+ENDIF(TESTS_ENABLED)
