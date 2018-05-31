@@ -27,8 +27,9 @@ namespace dsignal {
 #pragma STDC FENV_ACCESS ON
 #endif
 
-Rms::Rms(size_t dimension):
-    SignalProcessorBuffered(dimension)
+Rms::Rms(size_t dimension, size_t max_size):
+    SignalProcessorBuffered(max_size),
+    m_dimension(dimension)
 {
 
 }
@@ -36,23 +37,28 @@ Rms::Rms(size_t dimension):
 Rms::Rms(const Rms &rms):
     SignalProcessorBuffered(rms)
 {
-    m_current_rms=rms.m_current_rms;
-    m_current_sum=rms.m_current_sum;
+    m_current_rms = rms.m_current_rms;
+    m_current_sum = rms.m_current_sum;
+    m_dimension = rms.m_dimension;
 }
 
 void Rms::push(double value)
 {
+    // Todo: change the internal buffer to circular buffer
 #ifdef USE_FENV_ACCESS
     std::feclearexcept(FE_ALL_EXCEPT);
 #endif
-
-    if (size()>=maxSize())
-        m_current_sum-=SignalProcessorBuffered::pop();
+    if (m_internal_buffer.size()>=m_dimension) {
+        m_current_sum-=m_internal_buffer.front();
+        m_internal_buffer.pop_front();
+    }
 
     double new_value = value*value;
-    SignalProcessorBuffered::push(new_value);
+    m_internal_buffer.push_back(new_value);
     m_current_sum+=new_value;
-    m_current_rms = sqrt(m_current_sum/size());
+    m_current_rms = sqrt(m_current_sum/m_internal_buffer.size());
+
+    SignalProcessorBuffered::push(m_current_rms);
 
 #ifdef USE_FENV_ACCESS
     if(std::fetestexcept(FE_INVALID	  ))
@@ -66,16 +72,12 @@ void Rms::push(double value)
 #endif
 }
 
-double Rms::pop()
-{
-    return m_current_rms;
-}
-
 void Rms::reset()
 {
     SignalProcessorBuffered::reset();
     m_current_rms=0.0;
     m_current_sum=0.0;
+    m_internal_buffer.clear();
 }
 
 Rms *Rms::clone() const

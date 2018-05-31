@@ -40,7 +40,17 @@ TEST_CASE("rms testNegativePositive", "[rms]")
     rms.push(-8);
     rms.push(9);
     rms.push(-4);
-    REQUIRE((rms.pop()>6.163 && rms.pop()<6.165)==true);
+
+    // wait for internal buffer filling
+    rms.pop();
+    rms.pop();
+    rms.pop();
+    rms.pop();
+
+    // take last value
+    double value = rms.pop();
+
+    REQUIRE((value>6.163 && value<6.165)==true);
 }
 
 TEST_CASE("rms testReset", "[rms]")
@@ -55,7 +65,6 @@ TEST_CASE("rms testReset", "[rms]")
     rms.push(-4);
     rms.reset();
     REQUIRE(rms.has()==false);
-    REQUIRE(rms.pop()==0);
 }
 
 TEST_CASE("rms testOverflow", "[rms]")
