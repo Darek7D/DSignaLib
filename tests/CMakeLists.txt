@@ -3,10 +3,12 @@ set(UNIT_TEST_LIST
   signalprocessorbuffered
   dcmeanremoval
   decimator
+  decimatormean
   filterfir
   filteriir
   rms
   multiplier
+  arithmeticmean
   signalvector
   signalvectormixer
   signalpipeline

@@ -9,10 +9,12 @@ set(
       additionner.cpp
       dcmeanremoval.cpp
       decimator.cpp
+      decimatormean.cpp
       filterfir.cpp
       filteriir.cpp
       rms.cpp
       multiplier.cpp
+      arithmeticmean.cpp
       sample.cpp
       signalprocessorsimple.cpp
       signalprocessorbuffered.cpp

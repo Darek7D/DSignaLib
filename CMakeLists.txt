@@ -39,10 +39,12 @@ set(
     include/dsignal/additionner.h
     include/dsignal/dcmeanremoval.h
     include/dsignal/decimator.h
+    include/dsignal/decimatormean.h
     include/dsignal/filterfir.h
     include/dsignal/filteriir.h
     include/dsignal/rms.h
     include/dsignal/multiplier.h
+    include/dsignal/arithmeticmean.h
     include/dsignal/sample.h
     include/dsignal/signalprocessor.h
     include/dsignal/signalprocessorsimple.h
