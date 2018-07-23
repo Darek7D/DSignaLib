@@ -96,7 +96,8 @@ Sample out = s.output()->pop();
 ```
 
 The visualisation of other sample session:
-[![Build Status](http://tedtronix.pl/inne/signalflow_example.svg)]
+![SignalFlow Example](http://tedtronix.pl/inne/signalflow_example.svg)
+
  
 ## Building
 ```sh
