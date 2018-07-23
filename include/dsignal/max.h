@@ -16,8 +16,8 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_ARITHMETICMEAN_H
-#define DSIGNAL_ARITHMETICMEAN_H
+#ifndef DSIGNAL_MAX_H
+#define DSIGNAL_MAX_H
 
 #include "signalprocessorbuffered.h"
 #include "dsignal_export.h"
@@ -26,22 +26,20 @@
 namespace dsignal {
 
 /**
- * Arithmetic mean
+ * Maximum value in buffer since reset or construction.
  */
-class DSIGNAL_EXPORT ArithmeticMean: public SignalProcessorBuffered {
+class DSIGNAL_EXPORT Max: public SignalProcessorBuffered {
 public:
-    ArithmeticMean(size_t mean_samples=1, size_t max_size=1024);
-    ArithmeticMean(const ArithmeticMean &s);
+    Max(size_t max_size=1024);
+    Max(const Max &s);
     void push(double value) override;
     void reset() override;
-    ArithmeticMean *clone() const override;
+    Max *clone() const override;
 
 private:
-    size_t m_mean_samples;
-    double m_current_sum;
-    std::deque<double> m_mean_buffer;
+    double m_max;
 };
 
 }
 
-#endif // DSIGNAL_ARITHMETICMEAN_H
+#endif // DSIGNAL_MAX_H

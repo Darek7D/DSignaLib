@@ -16,32 +16,35 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_ARITHMETICMEAN_H
-#define DSIGNAL_ARITHMETICMEAN_H
+#include <dsignal/max.h>
+#include <catch.hpp>
+#include <iostream>
 
-#include "signalprocessorbuffered.h"
-#include "dsignal_export.h"
-#include <deque>
+using namespace dsignal;
 
-namespace dsignal {
+SCENARIO("maximum push pop test", "[maximum]")
+{
+    GIVEN("Max signal processor.") {
+        Max m;
 
-/**
- * Arithmetic mean
- */
-class DSIGNAL_EXPORT ArithmeticMean: public SignalProcessorBuffered {
-public:
-    ArithmeticMean(size_t mean_samples=1, size_t max_size=1024);
-    ArithmeticMean(const ArithmeticMean &s);
-    void push(double value) override;
-    void reset() override;
-    ArithmeticMean *clone() const override;
+        REQUIRE(m.has()==false);
 
-private:
-    size_t m_mean_samples;
-    double m_current_sum;
-    std::deque<double> m_mean_buffer;
-};
+        WHEN("push some values") {
+            m.push(10);
+            m.push(50);
+            m.push(60);
+            m.push(30);
 
+            THEN("it has some data") {
+                REQUIRE(m.has()==true);
+            }
+
+            THEN("it has maximum on output") {
+                REQUIRE(m.pop()==10);
+                REQUIRE(m.pop()==50);
+                REQUIRE(m.pop()==60);
+                REQUIRE(m.pop()==60);
+            }
+        }
+    }
 }
-
-#endif // DSIGNAL_ARITHMETICMEAN_H

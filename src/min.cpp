@@ -16,32 +16,41 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_ARITHMETICMEAN_H
-#define DSIGNAL_ARITHMETICMEAN_H
-
-#include "signalprocessorbuffered.h"
-#include "dsignal_export.h"
-#include <deque>
+#include <dsignal/min.h>
+#include <limits>
 
 namespace dsignal {
 
-/**
- * Arithmetic mean
- */
-class DSIGNAL_EXPORT ArithmeticMean: public SignalProcessorBuffered {
-public:
-    ArithmeticMean(size_t mean_samples=1, size_t max_size=1024);
-    ArithmeticMean(const ArithmeticMean &s);
-    void push(double value) override;
-    void reset() override;
-    ArithmeticMean *clone() const override;
-
-private:
-    size_t m_mean_samples;
-    double m_current_sum;
-    std::deque<double> m_mean_buffer;
-};
+Min::Min(size_t max_size):
+    SignalProcessorBuffered(max_size),
+    m_min(std::numeric_limits<int>::max())
+{
 
 }
 
-#endif // DSIGNAL_ARITHMETICMEAN_H
+Min::Min(const Min &s):
+    SignalProcessorBuffered(s),
+    m_min(s.m_min)
+{
+}
+
+void Min::push(double value)
+{
+    if (value<m_min)
+        m_min = value;
+
+    SignalProcessorBuffered::push(m_min);
+}
+
+void Min::reset()
+{
+    SignalProcessorBuffered::reset();
+    m_min = std::numeric_limits<int>::max();
+}
+
+Min *Min::clone() const
+{
+    return new Min( *this );
+}
+
+}

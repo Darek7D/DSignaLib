@@ -16,32 +16,45 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_ARITHMETICMEAN_H
-#define DSIGNAL_ARITHMETICMEAN_H
-
-#include "signalprocessorbuffered.h"
-#include "dsignal_export.h"
-#include <deque>
+#include <dsignal/max.h>
+#include <limits>
 
 namespace dsignal {
 
-/**
- * Arithmetic mean
- */
-class DSIGNAL_EXPORT ArithmeticMean: public SignalProcessorBuffered {
-public:
-    ArithmeticMean(size_t mean_samples=1, size_t max_size=1024);
-    ArithmeticMean(const ArithmeticMean &s);
-    void push(double value) override;
-    void reset() override;
-    ArithmeticMean *clone() const override;
+#ifdef USE_FENV_ACCESS
+#pragma STDC FENV_ACCESS ON
+#endif
 
-private:
-    size_t m_mean_samples;
-    double m_current_sum;
-    std::deque<double> m_mean_buffer;
-};
+Max::Max(size_t max_size):
+    SignalProcessorBuffered(max_size),
+    m_max(std::numeric_limits<int>::min())
+{
 
 }
 
-#endif // DSIGNAL_ARITHMETICMEAN_H
+Max::Max(const Max &s):
+    SignalProcessorBuffered(s),
+    m_max(s.m_max)
+{
+}
+
+void Max::push(double value)
+{
+    if (value>m_max)
+        m_max = value;
+
+    SignalProcessorBuffered::push(m_max);
+}
+
+void Max::reset()
+{
+    SignalProcessorBuffered::reset();
+    m_max = std::numeric_limits<int>::min();
+}
+
+Max *Max::clone() const
+{
+    return new Max( *this );
+}
+
+}

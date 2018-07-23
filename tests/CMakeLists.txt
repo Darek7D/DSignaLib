@@ -9,6 +9,8 @@ set(UNIT_TEST_LIST
   rms
   multiplier
   arithmeticmean
+  min
+  max
   signalvector
   signalvectormixer
   signalpipeline

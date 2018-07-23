@@ -15,6 +15,8 @@ set(
       rms.cpp
       multiplier.cpp
       arithmeticmean.cpp
+      min.cpp
+      max.cpp
       sample.cpp
       signalprocessorsimple.cpp
       signalprocessorbuffered.cpp

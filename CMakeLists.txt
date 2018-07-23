@@ -45,6 +45,8 @@ set(
     include/dsignal/rms.h
     include/dsignal/multiplier.h
     include/dsignal/arithmeticmean.h
+    include/dsignal/min.h
+    include/dsignal/max.h
     include/dsignal/sample.h
     include/dsignal/signalprocessor.h
     include/dsignal/signalprocessorsimple.h
