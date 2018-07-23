@@ -6,7 +6,7 @@ The small simple signal pipeline library.
 ## Version info
 Current version: 0.1.0 - early stage of development, no stable version currently.
 
-## Examples
+## Short description
 
 ### SignalProcessors
 Signal processor is the "smallest" computing unit in DSignal library. It behaves like a queue. You can push a data to it, and on every push, it make some processing storing it in the output buffer.
@@ -96,7 +96,7 @@ Sample out = s.output()->pop();
 ```
 
 The visualisation of other sample session:
-https://raw.githubusercontent.com/Darek7D/DSignal/master/doc/signalflow_example.svg
+[![Build Status](http://tedtronix.pl/inne/signalflow_example.svg)]
  
 ## Building
 ```sh
