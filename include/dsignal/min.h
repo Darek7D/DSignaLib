@@ -30,7 +30,7 @@ namespace dsignal {
  */
 class DSIGNAL_EXPORT Min: public SignalProcessorBuffered {
 public:
-    Min(size_t max_size=1024);
+    Min(size_t max_size=1024, bool throw_overflow=true);
     Min(const Min &s);
     void push(double value) override;
     void reset() override;

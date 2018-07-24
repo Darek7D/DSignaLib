@@ -27,8 +27,8 @@ namespace dsignal {
 #pragma STDC FENV_ACCESS ON
 #endif
 
-DcMeanRemoval::DcMeanRemoval(size_t mean_samples, size_t max_size):
-    SignalProcessorBuffered(max_size),
+DcMeanRemoval::DcMeanRemoval(size_t mean_samples, size_t max_size, bool throw_overflow):
+    SignalProcessorBuffered(max_size, throw_overflow),
     m_mean_samples(mean_samples),
     m_current_sum(0)
 {

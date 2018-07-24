@@ -35,8 +35,9 @@ namespace dsignal {
 class DSIGNAL_EXPORT FilterFir: public SignalProcessorBuffered
 {
 public:
-    FilterFir(int max_buffer_size=1024);
-    FilterFir(const std::vector<double> &a, int max_buffer_size=1024);
+    FilterFir(int max_buffer_size=1024, bool throw_overflow=true);
+    FilterFir(const std::vector<double> &a, int max_buffer_size=1024,
+              bool throw_overflow=true);
     FilterFir(const FilterFir& filter);
 
     void push(double value) override;

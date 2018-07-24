@@ -30,7 +30,7 @@ namespace dsignal {
  */
 class DSIGNAL_EXPORT ArithmeticMean: public SignalProcessorBuffered {
 public:
-    ArithmeticMean(size_t mean_samples=1, size_t max_size=1024);
+    ArithmeticMean(size_t mean_samples=1, size_t max_size=1024, bool throw_overflow=true);
     ArithmeticMean(const ArithmeticMean &s);
     void push(double value) override;
     void reset() override;

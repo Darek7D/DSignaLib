@@ -30,7 +30,7 @@ namespace dsignal {
  */
 class DSIGNAL_EXPORT Max: public SignalProcessorBuffered {
 public:
-    Max(size_t max_size=1024);
+    Max(size_t max_size=1024, bool throw_overflow=true);
     Max(const Max &s);
     void push(double value) override;
     void reset() override;

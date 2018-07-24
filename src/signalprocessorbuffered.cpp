@@ -21,8 +21,9 @@
 
 namespace dsignal {
 
-SignalProcessorBuffered::SignalProcessorBuffered(size_t max_size):
-    m_max_size(max_size)
+SignalProcessorBuffered::SignalProcessorBuffered(size_t max_size, bool throw_overflow):
+    m_max_size(max_size),
+    m_throw_overflow(throw_overflow)
 {
 }
 
@@ -30,12 +31,17 @@ SignalProcessorBuffered::SignalProcessorBuffered(const SignalProcessorBuffered &
 {
     m_buffer = s.m_buffer;
     m_max_size = s.m_max_size;
+    m_throw_overflow = s.m_throw_overflow;
 }
 
 void SignalProcessorBuffered::push(double value)
 {
-    if (m_buffer.size()>=m_max_size)
-        throw std::overflow_error("Max size reached!");
+    if (m_buffer.size()>=m_max_size) {
+        if (m_throw_overflow)
+            throw std::overflow_error("Max size reached!");
+        else
+            return;
+    }
 
     m_buffer.push_back(value);
 }

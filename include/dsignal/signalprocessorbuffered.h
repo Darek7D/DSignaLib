@@ -38,7 +38,7 @@ public:
      * Constructs the SignalProcessorBuffered object.
      * \param max_size max size of the internal buffer.
      */
-    SignalProcessorBuffered(size_t max_size=1024);
+    SignalProcessorBuffered(size_t max_size=1024, bool throw_overflow=true);
     SignalProcessorBuffered(const SignalProcessorBuffered &s);
 
     /**
@@ -77,6 +77,7 @@ protected:
 private:
     std::deque<double> m_buffer;
     size_t m_max_size;
+    bool m_throw_overflow;
 };
 
 }

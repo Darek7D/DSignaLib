@@ -27,8 +27,8 @@ namespace dsignal {
 #pragma STDC FENV_ACCESS ON
 #endif
 
-Rms::Rms(size_t dimension, size_t max_size):
-    SignalProcessorBuffered(max_size),
+Rms::Rms(size_t dimension, size_t max_size, bool throw_overflow):
+    SignalProcessorBuffered(max_size, throw_overflow),
     m_dimension(dimension)
 {
 

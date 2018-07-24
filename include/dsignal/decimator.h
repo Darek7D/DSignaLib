@@ -28,7 +28,7 @@ namespace dsignal {
 
 class DSIGNAL_EXPORT Decimator: public SignalProcessorBuffered {
 public:
-    Decimator(int factor=1, size_t max_size=1024);
+    Decimator(int factor=1, size_t max_size=1024, bool throw_overflow=true);
     Decimator(const Decimator &s);
     void push(double value) override;
     void reset() override;

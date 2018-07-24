@@ -22,7 +22,7 @@
 
 namespace dsignal {
 
-DecimatorMean::DecimatorMean(int mean_samples, size_t max_size):
+DecimatorMean::DecimatorMean(int mean_samples, size_t max_size, bool throw_overflow):
     SignalProcessorBuffered(max_size),
     m_mean_samples(mean_samples),
     m_current_index(0)

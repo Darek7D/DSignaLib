@@ -21,8 +21,8 @@
 
 namespace dsignal {
 
-Multiplier::Multiplier(double multiplier, size_t max_size):
-    SignalProcessorBuffered(max_size),
+Multiplier::Multiplier(double multiplier, size_t max_size, bool throw_overflow):
+    SignalProcessorBuffered(max_size, throw_overflow),
     m_multiplier(multiplier)
 {
 }

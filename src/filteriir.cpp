@@ -26,16 +26,16 @@
 
 namespace dsignal {
 
-FilterIir::FilterIir(int max_buffer_size):
-    SignalProcessorBuffered(max_buffer_size)
+FilterIir::FilterIir(int max_buffer_size, bool throw_overflow):
+    SignalProcessorBuffered(max_buffer_size, throw_overflow)
 {
 
 }
 
 FilterIir::FilterIir(const std::vector<double> &b,
                      const std::vector<double> &a,
-                     int max_buffer_size):
-    SignalProcessorBuffered(max_buffer_size),
+                     int max_buffer_size, bool throw_overflow):
+    SignalProcessorBuffered(max_buffer_size, throw_overflow),
     m_b(b),
     m_a(a)
 {

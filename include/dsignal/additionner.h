@@ -28,7 +28,7 @@ namespace dsignal {
 
 class DSIGNAL_EXPORT Additionner: public SignalProcessorBuffered {
 public:
-    Additionner(double addend=0, size_t max_size=1024);
+    Additionner(double addend=0, size_t max_size=1024, bool throw_overflow=true);
     Additionner(const Additionner &s);
     void push(double value) override;
 

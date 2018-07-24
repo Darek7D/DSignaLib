@@ -35,7 +35,7 @@ namespace dsignal {
 class DSIGNAL_EXPORT FilterIir: public SignalProcessorBuffered
 {
 public:
-    FilterIir(int max_buffer_size=1024);
+    FilterIir(int max_buffer_size=1024, bool throw_overflow=true);
 
     /**
      * Filter constructor.
@@ -44,7 +44,8 @@ public:
      */
     FilterIir(const std::vector<double> &b,
               const std::vector<double> &a,
-              int max_buffer_size=1024);
+              int max_buffer_size=1024,
+              bool throw_overflow=true);
 
     FilterIir(const FilterIir &filter);
 

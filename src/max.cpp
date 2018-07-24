@@ -25,8 +25,8 @@ namespace dsignal {
 #pragma STDC FENV_ACCESS ON
 #endif
 
-Max::Max(size_t max_size):
-    SignalProcessorBuffered(max_size),
+Max::Max(size_t max_size, bool throw_overflow):
+    SignalProcessorBuffered(max_size, throw_overflow),
     m_max(std::numeric_limits<int>::min())
 {
 
