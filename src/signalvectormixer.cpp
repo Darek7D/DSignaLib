@@ -23,7 +23,7 @@
 namespace dsignal {
 
 SignalVectorMixer::SignalVectorMixer():
-    SignalVector()
+    m_mixer_operation(nullptr)
 {
 }
 

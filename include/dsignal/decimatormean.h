@@ -28,7 +28,7 @@ namespace dsignal {
 
 class DSIGNAL_EXPORT DecimatorMean: public SignalProcessorBuffered {
 public:
-    DecimatorMean(int mean_samples=2, size_t max_size=1024, bool throw_overflow=true);
+    DecimatorMean(size_t mean_samples=2, size_t max_size=1024, bool throw_overflow=true);
     DecimatorMean(const DecimatorMean &s);
     void push(double value) override;
     void reset() override;

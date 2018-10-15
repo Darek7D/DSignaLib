@@ -32,7 +32,8 @@ Decimator::Decimator(int factor, size_t max_size, bool throw_overflow):
 
 Decimator::Decimator(const Decimator &s):
     SignalProcessorBuffered(s),
-    m_factor(s.m_factor)
+    m_factor(s.m_factor),
+    m_counter(s.m_counter)
 {
 
 }

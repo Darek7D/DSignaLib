@@ -43,8 +43,8 @@ SignalFlow::SignalFlow(const SignalFlow &signal_flow):
 
 SignalFlow::~SignalFlow()
 {
-    if (m_vector!=nullptr)
-        delete m_vector;
+    delete m_vector;
+    m_vector = nullptr;
 }
 
 SignalFlow &SignalFlow::operator=(const SignalFlow &signal_flow)
@@ -52,8 +52,7 @@ SignalFlow &SignalFlow::operator=(const SignalFlow &signal_flow)
     if(this == &signal_flow)
         return *this;
 
-    if (m_vector!=nullptr)
-        delete m_vector;
+    delete m_vector;
 
     m_session = signal_flow.m_session;
     m_vector = signal_flow.m_vector->clone();

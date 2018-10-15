@@ -22,7 +22,6 @@
 namespace dsignal {
 
 SignalVector::SignalVector():
-    m_name(),
     m_enabled(true)
 {
 }
@@ -111,7 +110,7 @@ void SignalVector::reset()
 
     m_enabled = true;
     for (auto s: m_signals)
-        return s->reset();
+        s->reset();
 }
 
 SignalVector *SignalVector::clone() const

@@ -25,7 +25,7 @@ Sample::Sample()
 
 }
 
-Sample::Sample(int channels)
+Sample::Sample(size_t channels)
 {
     m_values.resize(channels, 0.0);
 }

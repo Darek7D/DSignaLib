@@ -22,9 +22,10 @@
 
 namespace dsignal {
 
-DecimatorMean::DecimatorMean(int mean_samples, size_t max_size, bool throw_overflow):
+DecimatorMean::DecimatorMean(size_t mean_samples, size_t max_size, bool throw_overflow):
     SignalProcessorBuffered(max_size, throw_overflow),
     m_mean_samples(mean_samples),
+    m_current_sum(0),
     m_current_index(0)
 {
     if (m_mean_samples<=0)
@@ -34,6 +35,7 @@ DecimatorMean::DecimatorMean(int mean_samples, size_t max_size, bool throw_overf
 DecimatorMean::DecimatorMean(const DecimatorMean &s):
     SignalProcessorBuffered(s),
     m_mean_samples(s.m_mean_samples),
+    m_current_sum(0),
     m_current_index(s.m_current_index)
 {
 
@@ -48,7 +50,7 @@ void DecimatorMean::push(double value)
     m_current_index++;
 
     if (m_current_index>=m_mean_samples) {
-        SignalProcessorBuffered::push(m_current_sum/(double)m_current_index);
+        SignalProcessorBuffered::push(m_current_sum/static_cast<double>(m_current_index));
         m_current_sum=0;
         m_current_index=0;
     }

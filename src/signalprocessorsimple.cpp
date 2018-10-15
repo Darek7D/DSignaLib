@@ -29,7 +29,8 @@ SignalProcessorSimple::SignalProcessorSimple():
 }
 
 SignalProcessorSimple::SignalProcessorSimple(const SignalProcessorSimple &signal_processor_simple)
-    : SignalProcessorSimple()
+    : m_value(signal_processor_simple.m_value),
+      m_has(signal_processor_simple.m_has)
 {
 
 }

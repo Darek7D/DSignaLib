@@ -29,7 +29,7 @@ class DSIGNAL_EXPORT SignalProcessorSimple: public SignalProcessor
 public:
     SignalProcessorSimple();
     SignalProcessorSimple(const SignalProcessorSimple &signal_processor_simple);
-    virtual ~SignalProcessorSimple() {}
+    ~SignalProcessorSimple() override {}
     double pop() override;
     bool has() override;
     void push(double value) override;

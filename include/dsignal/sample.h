@@ -29,7 +29,7 @@ class DSIGNAL_EXPORT Sample
 {
 public:
     Sample();
-    Sample(int channels);
+    Sample(size_t channels);
     Sample(const std::vector<double> &values);
     Sample(const Sample &sample);
     virtual ~Sample();

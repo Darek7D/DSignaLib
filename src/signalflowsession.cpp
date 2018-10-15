@@ -63,7 +63,7 @@ SignalVector *SignalFlowSession::output() const
 
 void SignalFlowSession::process() {
     bool finished = false;
-    while (finished==false) {
+    while (!finished) {
         finished = true;
         for (auto pair: m_signal_connections) {
             while (pair.first->m_vector->has()) {

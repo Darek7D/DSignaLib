@@ -39,8 +39,7 @@ void SignalProcessorBuffered::push(double value)
     if (m_buffer.size()>=m_max_size) {
         if (m_throw_overflow)
             throw std::overflow_error("Max size reached!");
-        else
-            return;
+        return;
     }
 
     m_buffer.push_back(value);
