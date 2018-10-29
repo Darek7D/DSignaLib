@@ -108,7 +108,6 @@ void SignalVector::reset()
 {
     std::lock_guard<std::mutex> guard(m_mutex);
 
-    m_enabled = true;
     for (auto s: m_signals)
         s->reset();
 }
