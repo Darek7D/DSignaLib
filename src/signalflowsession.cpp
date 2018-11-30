@@ -18,6 +18,7 @@
 
 #include <dsignal/signalflowsession.h>
 #include <dsignal/signalflow.h>
+#include <stdexcept>
 #include <algorithm>
 #include <iostream>
 #include <cassert>
@@ -45,20 +46,6 @@ SignalVector *SignalFlowSession::input(int id) const {
 
 SignalVector *SignalFlowSession::output(int id) const {
     return m_outputs.at(id)->m_vector;
-}
-
-SignalVector *SignalFlowSession::input() const
-{
-    if (m_inputs.empty())
-        throw std::runtime_error("No inputs defined!");
-    return m_inputs.begin()->second->m_vector;
-}
-
-SignalVector *SignalFlowSession::output() const
-{
-    if (m_outputs.empty())
-        throw std::runtime_error("No outputs defined!");
-    return m_outputs.begin()->second->m_vector;
 }
 
 void SignalFlowSession::process() {

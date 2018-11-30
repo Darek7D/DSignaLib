@@ -96,23 +96,13 @@ public:
      * Returns the SignalFlow object declared by setInput() method
      * \param id unique identification number defined by setInput() method.
      */
-    virtual SignalVector* input(int id) const;
+    virtual SignalVector* input(int id=0) const;
 
     /**
      * Returns the SignalFlow object declared by setOutput() method
      * \param id unique identification number defined by setOutput() method.
      */
-    virtual SignalVector* output(int id) const;
-
-    /**
-     * \copybrief SignalFlowSession::input()
-     */
-    virtual SignalVector* input() const;
-
-    /**
-     * \copybrief SignalFlowSession::output()
-     */
-    virtual SignalVector* output() const;
+    virtual SignalVector* output(int id=0) const;
 
     /**
      * Runs the processing of all buffered data in SignalFlow objects.
