@@ -61,9 +61,6 @@ public:
 
     SignalProcessorBuffered *clone() const override;
 
-    /**
-     * The current size of buffer.
-     */
     size_t size() const override;
 
     /**
