@@ -64,7 +64,7 @@ public:
     /**
      * The current size of buffer.
      */
-    virtual size_t size() const;
+    size_t size() const override;
 
     /**
      * The max size of the buffer.
