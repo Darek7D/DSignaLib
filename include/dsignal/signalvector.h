@@ -75,6 +75,11 @@ public:
     virtual void push(const Sample &sample);
 
     /**
+     * Returns the number of samples available to pop().
+     */
+    virtual size_t size() const;
+
+    /**
      * Resets each SignalProcessor.
      */
     virtual void reset();

@@ -20,6 +20,7 @@
 #define DSIGNAL_SIGNALPROCESSOR_H
 
 #include "dsignal_export.h"
+#include <cstddef>
 
 namespace dsignal {
 
@@ -33,7 +34,7 @@ namespace dsignal {
 class DSIGNAL_EXPORT SignalProcessor
 {
 public:
-    virtual ~SignalProcessor() {}
+    virtual ~SignalProcessor() = default;
 
     virtual void push(double value) = 0;
 
@@ -41,13 +42,18 @@ public:
      * Checks if the SignalProcessor has elements.
      * \returns true if SignalProcessor has data to output by pop().
      */
-    virtual bool has() = 0;
+    virtual bool has() const = 0;
 
     /**
      * Returns and removes the last element of the SignalProcessor.
      * \returns The last element of SignalProcessor.
      */
     virtual double pop() = 0;
+
+    /**
+     * The number of data available to pop();
+     */
+    virtual size_t size() const = 0;
 
     /**
      * Resets and clears data in internal buffers.

@@ -41,7 +41,7 @@ double SignalProcessorSimple::pop()
     return m_value;
 }
 
-bool SignalProcessorSimple::has()
+bool SignalProcessorSimple::has() const
 {
     return m_has;
 }
@@ -50,6 +50,11 @@ void SignalProcessorSimple::push(double value)
 {
     m_value = value;
     m_has = true;
+}
+
+size_t SignalProcessorSimple::size() const
+{
+    return has();
 }
 
 void SignalProcessorSimple::reset()

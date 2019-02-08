@@ -31,8 +31,9 @@ public:
     SignalProcessorSimple(const SignalProcessorSimple &signal_processor_simple);
     ~SignalProcessorSimple() override {}
     double pop() override;
-    bool has() override;
+    bool has() const override;
     void push(double value) override;
+    size_t size() const override;
     void reset() override;
     SignalProcessorSimple *clone() const override;
 

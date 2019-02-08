@@ -80,9 +80,15 @@ bool SignalVector::has() const
 {
     std::lock_guard<std::mutex> guard(m_mutex);
 
-    for (auto s: m_signals)
-        return s->has();
-    return false;
+    if (m_signals.empty())
+        return false;
+
+    for (auto s: m_signals) {
+        if (!s->has())
+            return false;
+    }
+
+    return true;
 }
 
 void SignalVector::push(const Sample &sample)
@@ -102,6 +108,17 @@ void SignalVector::push(const Sample &sample)
             throw std::runtime_error(s);
         }
     }
+}
+
+size_t SignalVector::size() const
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+    size_t ret=0;
+    for (auto s: m_signals) {
+        if (s->size()>ret)
+            ret = s->size();
+    }
+    return ret;
 }
 
 void SignalVector::reset()

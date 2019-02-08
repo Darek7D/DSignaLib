@@ -48,7 +48,7 @@ public:
      */
     void push(double value) override;
 
-    bool has() override;
+    bool has() const override;
 
     /**
      * @copydoc SignalProcessor::pop()
@@ -64,12 +64,12 @@ public:
     /**
      * The current size of buffer.
      */
-    virtual size_t size();
+    virtual size_t size() const;
 
     /**
      * The max size of the buffer.
      */
-    virtual size_t maxSize();
+    virtual size_t maxSize() const;
 
 protected:
     const std::deque<double>& data();

@@ -54,7 +54,7 @@ double SignalProcessorBuffered::pop()
     return val;
 }
 
-bool SignalProcessorBuffered::has()
+bool SignalProcessorBuffered::has() const
 {
     return !m_buffer.empty();
 }
@@ -75,12 +75,12 @@ SignalProcessorBuffered *SignalProcessorBuffered::clone() const
     return new SignalProcessorBuffered( *this );
 }
 
-size_t SignalProcessorBuffered::size()
+size_t SignalProcessorBuffered::size() const
 {
     return m_buffer.size();
 }
 
-size_t SignalProcessorBuffered::maxSize()
+size_t SignalProcessorBuffered::maxSize() const
 {
     return m_max_size;
 }
