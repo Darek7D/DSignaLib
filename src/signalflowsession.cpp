@@ -68,6 +68,16 @@ void SignalFlowSession::process() {
     }
 }
 
+void SignalFlowSession::reset()
+{
+    for (auto pair: m_signal_connections) {
+        pair.first->vector()->reset();
+        for (auto destination: pair.second) {
+            destination->vector()->reset();
+        }
+    }
+}
+
 std::string SignalFlowSession::dumpGraph() const
 {
     std::stringstream ss;

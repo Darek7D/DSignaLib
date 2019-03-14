@@ -110,6 +110,11 @@ public:
     virtual void process();
 
     /**
+     * Resets all signals.
+     */
+    virtual void reset();
+
+    /**
      * Dump the graph of all connections in Graphvis format.
      */
     virtual std::string dumpGraph() const;
