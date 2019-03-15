@@ -3,9 +3,6 @@ Travis CI: [![Build Status](https://travis-ci.com/Darek7D/DSignal.svg?branch=mas
 
 The small simple signal pipeline library.
 
-## Version info
-Current version: 0.1.0 - early stage of development, no stable version currently.
-
 ## Short description
 
 ### SignalProcessors
