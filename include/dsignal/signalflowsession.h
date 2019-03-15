@@ -115,6 +115,16 @@ public:
     virtual void reset();
 
     /**
+     * Enables or disables all declared outputs.
+     */
+    virtual void enableOutputs(bool enable=true);
+
+    /**
+     * Enables or disables all declared inputs.
+     */
+    virtual void enableInputs(bool enable=true);
+
+    /**
      * Dump the graph of all connections in Graphvis format.
      */
     virtual std::string dumpGraph() const;

@@ -75,11 +75,39 @@ SCENARIO("Signal flow process", "[signalflow]")
                 s.input()->push(sample);
             s.process();
             THEN("Output signals have values") {
+                REQUIRE(s.output(0)->size()==100);
+                REQUIRE(s.output(1)->size()==100);
+                REQUIRE(s.output(2)->size()==100);
                 for (int i=0; i<100; i++) {
                     REQUIRE(s.output(0)->pop().get(0)==10);
                     REQUIRE(s.output(1)->pop().get(0)==10);
                     REQUIRE(s.output(2)->pop().get(0)==10);
                 }
+            }
+        }
+
+        WHEN("Push more samples when disabled") {
+            s.enableOutputs(false);
+            for (int i=0; i<100; i++)
+                s.input()->push(sample);
+            s.process();
+            THEN("Output signals have no values") {
+                REQUIRE(s.output(0)->size()==0);
+                REQUIRE(s.output(1)->size()==0);
+                REQUIRE(s.output(2)->size()==0);
+            }
+        }
+
+        WHEN("Push more samples and reset") {
+            s.enableOutputs(true);
+            for (int i=0; i<100; i++)
+                s.input()->push(sample);
+            s.process();
+            s.reset();
+            THEN("Output signals have no values") {
+                REQUIRE(s.output(0)->size()==0);
+                REQUIRE(s.output(1)->size()==0);
+                REQUIRE(s.output(2)->size()==0);
             }
         }
     }

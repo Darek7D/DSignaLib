@@ -78,6 +78,18 @@ void SignalFlowSession::reset()
     }
 }
 
+void SignalFlowSession::enableOutputs(bool enable)
+{
+    for (auto pair: m_outputs)
+        pair.second->vector()->enable(enable);
+}
+
+void SignalFlowSession::enableInputs(bool enable)
+{
+    for (auto pair: m_inputs)
+        pair.second->vector()->enable(enable);
+}
+
 std::string SignalFlowSession::dumpGraph() const
 {
     std::stringstream ss;
