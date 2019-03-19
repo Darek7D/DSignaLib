@@ -16,8 +16,8 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_DECIMATOR_H
-#define DSIGNAL_DECIMATOR_H
+#ifndef DSIGNAL_DECIMATORMEAN_H
+#define DSIGNAL_DECIMATORMEAN_H
 
 #include "signalprocessorbuffered.h"
 #include "dsignal_export.h"
@@ -43,4 +43,4 @@ private:
 
 }
 
-#endif // DSIGNAL_DECIMATOR_H
+#endif // DSIGNAL_DECIMATORMEAN_H

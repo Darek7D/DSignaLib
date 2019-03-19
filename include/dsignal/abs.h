@@ -16,8 +16,8 @@
  * along with DSignal.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DSIGNAL_MAX_H
-#define DSIGNAL_MAX_H
+#ifndef DSIGNAL_ABS_H
+#define DSIGNAL_ABS_H
 
 #include "signalprocessorbuffered.h"
 #include "dsignal_export.h"
@@ -39,4 +39,4 @@ public:
 
 }
 
-#endif // DSIGNAL_MAX_H
+#endif // DSIGNAL_ABS_H
