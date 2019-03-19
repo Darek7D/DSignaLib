@@ -6,7 +6,7 @@ set (CMAKE_CXX_STANDARD 11)
 # LIBRARY VERSION
 ##############################################################################
 SET (DSIGNAL_VERSION_MAJOR 0)
-SET (DSIGNAL_VERSION_MINOR 2)
+SET (DSIGNAL_VERSION_MINOR 3)
 SET (DSIGNAL_VERSION_FIX 0)
 
 configure_file("${CMAKE_SOURCE_DIR}/include/dsignal/version.h.in" "${CMAKE_BINARY_DIR}/include/dsignal/version.h" @ONLY)
@@ -36,6 +36,7 @@ ENDIF (USE_FENV_ACCESS)
 ##############################################################################
 set(
   DSIGNAL_HEADERS
+    include/dsignal/abs.h
     include/dsignal/additionner.h
     include/dsignal/dcmeanremoval.h
     include/dsignal/decimator.h

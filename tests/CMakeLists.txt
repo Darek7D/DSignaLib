@@ -1,4 +1,5 @@
 set(UNIT_TEST_LIST
+  abs
   additionner
   signalprocessorbuffered
   dcmeanremoval

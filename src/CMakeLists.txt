@@ -6,6 +6,7 @@ include (GenerateExportHeader)
 ##############################################################################
 set(
   DSIGNAL_SOURCES
+      abs.cpp
       additionner.cpp
       dcmeanremoval.cpp
       decimator.cpp
