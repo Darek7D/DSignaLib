@@ -56,7 +56,13 @@ void Rms::push(double value)
     double new_value = value*value;
     m_internal_buffer.push_back(new_value);
     m_current_sum+=new_value;
-    m_current_rms = sqrt(m_current_sum/m_internal_buffer.size());
+
+    if (m_current_sum<0.0) {
+        reset();
+        m_current_rms = 0.0;
+    } else {
+        m_current_rms = sqrt(m_current_sum/m_internal_buffer.size());
+    }
 
     SignalProcessorBuffered::push(m_current_rms);
 
