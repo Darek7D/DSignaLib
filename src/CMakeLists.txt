@@ -18,6 +18,7 @@ set(
       arithmeticmean.cpp
       min.cpp
       max.cpp
+      zerocrossing.cpp
       sample.cpp
       signalprocessorsimple.cpp
       signalprocessorbuffered.cpp

@@ -12,6 +12,7 @@ set(UNIT_TEST_LIST
   arithmeticmean
   min
   max
+  zerocrossing
   signalvector
   signalvectormixer
   signalpipeline
