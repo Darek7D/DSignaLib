@@ -48,6 +48,7 @@ set(
     include/dsignal/arithmeticmean.h
     include/dsignal/min.h
     include/dsignal/max.h
+    include/dsignal/zerocrossing.h
     include/dsignal/sample.h
     include/dsignal/signalprocessor.h
     include/dsignal/signalprocessorsimple.h
