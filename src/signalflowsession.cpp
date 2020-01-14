@@ -32,6 +32,13 @@ void SignalFlowSession::connect(SignalFlow* input, SignalFlow* output) {
     m_signal_connections[input].push_back(output);
 }
 
+void SignalFlowSession::clearConnections()
+{
+    m_signal_connections.clear();
+    m_inputs.clear();
+    m_outputs.clear();
+}
+
 void SignalFlowSession::setInput(SignalFlow& sf, int id){
     m_inputs[id] = &sf;
 }

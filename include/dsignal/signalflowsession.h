@@ -73,6 +73,11 @@ public:
     virtual void connect(SignalFlow* input, SignalFlow* output);
 
     /**
+     * Clear all connections.
+     */
+    virtual void clearConnections();
+
+    /**
      * Declare the given SignalFlow as input. When you declare the input,
      * you can access it using the input() method.
      * The SignalFlow declaration doesn't affect the processing, it is only used
