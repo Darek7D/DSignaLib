@@ -57,6 +57,8 @@ public:
      */
     double pop() override;
 
+    double value() const override;
+
     void reset() override;
 
     SignalProcessorBuffered *clone() const override;

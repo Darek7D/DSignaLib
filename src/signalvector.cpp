@@ -76,6 +76,17 @@ Sample SignalVector::pop()
     return s;
 }
 
+Sample SignalVector::value() const
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+
+    Sample s(channels());
+    for (size_t c=0; c<m_signals.size(); c++)
+        s.set(c, m_signals.at(c)->value());
+
+    return s;
+}
+
 bool SignalVector::has() const
 {
     std::lock_guard<std::mutex> guard(m_mutex);

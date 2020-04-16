@@ -48,17 +48,30 @@ SCENARIO("signalvector push pop test", "[signalvector]")
             }
 
             THEN("samples are equal to init samples") {
-                Sample s1 = sig.pop();
-                REQUIRE(s1.get(0)==10.);
-                REQUIRE(s1.get(1)==11.);
-                REQUIRE(s1.get(2)==12.);
-                REQUIRE(s1.get(3)==13.);
 
-                Sample s2 = sig.pop();
-                REQUIRE(s2.get(0)==10.);
-                REQUIRE(s2.get(1)==11.);
-                REQUIRE(s2.get(2)==12.);
-                REQUIRE(s2.get(3)==13.);
+                Sample s1a = sig.value();
+                REQUIRE(s1a.get(0)==10.);
+                REQUIRE(s1a.get(1)==11.);
+                REQUIRE(s1a.get(2)==12.);
+                REQUIRE(s1a.get(3)==13.);
+
+                Sample s1b = sig.pop();
+                REQUIRE(s1b.get(0)==10.);
+                REQUIRE(s1b.get(1)==11.);
+                REQUIRE(s1b.get(2)==12.);
+                REQUIRE(s1b.get(3)==13.);
+
+                Sample s2a = sig.value();
+                REQUIRE(s2a.get(0)==10.);
+                REQUIRE(s2a.get(1)==11.);
+                REQUIRE(s2a.get(2)==12.);
+                REQUIRE(s2a.get(3)==13.);
+
+                Sample s2b = sig.pop();
+                REQUIRE(s2b.get(0)==10.);
+                REQUIRE(s2b.get(1)==11.);
+                REQUIRE(s2b.get(2)==12.);
+                REQUIRE(s2b.get(3)==13.);
             }
         }
     }

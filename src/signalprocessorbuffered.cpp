@@ -47,11 +47,16 @@ void SignalProcessorBuffered::push(double value)
 
 double SignalProcessorBuffered::pop()
 {
-    if (m_buffer.empty())
-        throw std::out_of_range("No data in buffer!");
-    double val = m_buffer.front();
+    double val = value();
     m_buffer.pop_front();
     return val;
+}
+
+double SignalProcessorBuffered::value() const
+{
+    if (m_buffer.empty())
+        throw std::out_of_range("No data in buffer!");
+    return m_buffer.front();
 }
 
 bool SignalProcessorBuffered::has() const

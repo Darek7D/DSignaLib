@@ -33,8 +33,13 @@ TEST_CASE("signalprocessorbuffered testPushPop", "[signalprocessorbuffered]")
     REQUIRE(sig.size()==3);
     REQUIRE(sig.has());
 
+    REQUIRE(sig.value()==1);
     REQUIRE(sig.pop()==1);
+
+    REQUIRE(sig.value()==2);
     REQUIRE(sig.pop()==2);
+
+    REQUIRE(sig.value()==3);
     REQUIRE(sig.pop()==3);
 
     REQUIRE(sig.size()==0);

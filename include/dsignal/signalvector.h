@@ -64,6 +64,11 @@ public:
     virtual Sample pop();
 
     /**
+     * Gets the current values from underlying SignalProcessor's and return as a Sample.
+     */
+    virtual Sample value() const;
+
+    /**
      * Checks if a SignalVector has a value, that you can pop().
      */
     virtual bool has() const;

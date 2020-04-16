@@ -51,6 +51,11 @@ public:
     virtual double pop() = 0;
 
     /**
+     * Returns current value of SignalProcessor.
+     */
+    virtual double value() const = 0;
+
+    /**
      * The number of data available to pop();
      */
     virtual size_t size() const = 0;

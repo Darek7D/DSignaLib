@@ -41,6 +41,11 @@ double SignalProcessorSimple::pop()
     return m_value;
 }
 
+double SignalProcessorSimple::value() const
+{
+    return m_value;
+}
+
 bool SignalProcessorSimple::has() const
 {
     return m_has;
