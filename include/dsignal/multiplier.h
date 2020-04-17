@@ -29,7 +29,6 @@ namespace dsignal {
 class DSIGNAL_EXPORT Multiplier: public SignalProcessorBuffered {
 public:
     Multiplier(double multiplier=1, size_t max_size=1024, bool throw_overflow=true);
-    Multiplier(const Multiplier &s);
     void push(double value) override;
 
     Multiplier *clone() const override;

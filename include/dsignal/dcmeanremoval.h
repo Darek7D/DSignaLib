@@ -44,7 +44,6 @@ namespace dsignal {
 class DSIGNAL_EXPORT DcMeanRemoval: public SignalProcessorBuffered {
 public:
     DcMeanRemoval(size_t mean_samples=1, size_t max_size=1024, bool throw_overflow=true);
-    DcMeanRemoval(const DcMeanRemoval &s);
     void push(double value) override;
     void reset() override;
     DcMeanRemoval *clone() const override;

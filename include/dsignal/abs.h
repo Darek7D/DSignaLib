@@ -31,7 +31,6 @@ namespace dsignal {
 class DSIGNAL_EXPORT Abs: public SignalProcessorBuffered {
 public:
     Abs(size_t max_size=1024, bool throw_overflow=true);
-    Abs(const Abs &s);
     void push(double value) override;
     void reset() override;
     Abs *clone() const override;

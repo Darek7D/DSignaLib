@@ -34,14 +34,6 @@ Rms::Rms(size_t dimension, size_t max_size, bool throw_overflow):
 
 }
 
-Rms::Rms(const Rms &rms):
-    SignalProcessorBuffered(rms)
-{
-    m_current_rms = rms.m_current_rms;
-    m_current_sum = rms.m_current_sum;
-    m_dimension = rms.m_dimension;
-}
-
 void Rms::push(double value)
 {
     // Todo: change the internal buffer to circular buffer

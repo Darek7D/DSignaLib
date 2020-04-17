@@ -35,13 +35,6 @@ Additionner::Additionner(double addend, size_t max_size, bool throw_overflow):
 
 }
 
-Additionner::Additionner(const Additionner &s):
-    SignalProcessorBuffered(s),
-    m_addend(s.m_addend)
-{
-
-}
-
 void Additionner::push(double value)
 {
 #ifdef USE_FENV_ACCESS

@@ -35,14 +35,6 @@ DcMeanRemoval::DcMeanRemoval(size_t mean_samples, size_t max_size, bool throw_ov
 
 }
 
-DcMeanRemoval::DcMeanRemoval(const DcMeanRemoval &s):
-    SignalProcessorBuffered(s),
-    m_mean_samples(s.m_mean_samples),
-    m_current_sum(s.m_current_sum),
-    m_mean_buffer(s.m_mean_buffer)
-{
-}
-
 void DcMeanRemoval::push(double value)
 {
 #ifdef USE_FENV_ACCESS

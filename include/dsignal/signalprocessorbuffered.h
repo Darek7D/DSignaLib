@@ -39,7 +39,6 @@ public:
      * \param max_size max size of the internal buffer.
      */
     SignalProcessorBuffered(size_t max_size=1024, bool throw_overflow=true);
-    SignalProcessorBuffered(const SignalProcessorBuffered &s);
 
     /**
      * @copydoc SignalProcessor::push()

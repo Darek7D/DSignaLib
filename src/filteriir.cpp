@@ -46,15 +46,6 @@ FilterIir::FilterIir(const std::vector<double> &b,
     m_filter_feedback.resize(m_a.size(), 0);
 }
 
-FilterIir::FilterIir(const FilterIir &filter):
-    SignalProcessorBuffered(filter)
-{
-    m_filter_buffer   = filter.m_filter_buffer;
-    m_filter_feedback = filter.m_filter_feedback;
-    m_b               = filter.m_b;
-    m_a               = filter.m_a;
-}
-
 void FilterIir::push(double value)
 {
     m_filter_buffer.push_front(value);

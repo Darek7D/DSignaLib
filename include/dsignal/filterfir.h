@@ -38,7 +38,6 @@ public:
     FilterFir(size_t max_buffer_size=1024, bool throw_overflow=true);
     FilterFir(const std::vector<double> &a, size_t max_buffer_size=1024,
               bool throw_overflow=true);
-    FilterFir(const FilterFir& filter);
 
     void push(double value) override;
     void reset() override;

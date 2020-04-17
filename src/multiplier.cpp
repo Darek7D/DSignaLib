@@ -27,12 +27,6 @@ Multiplier::Multiplier(double multiplier, size_t max_size, bool throw_overflow):
 {
 }
 
-Multiplier::Multiplier(const Multiplier &s):
-    SignalProcessorBuffered(s),
-    m_multiplier(s.m_multiplier)
-{
-}
-
 void Multiplier::push(double value)
 {
     SignalProcessorBuffered::push(value*m_multiplier);

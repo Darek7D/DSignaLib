@@ -47,8 +47,6 @@ public:
               size_t max_buffer_size=1024,
               bool throw_overflow=true);
 
-    FilterIir(const FilterIir &filter);
-
     void push(double value) override;
     void reset() override;
     FilterIir *clone() const override;

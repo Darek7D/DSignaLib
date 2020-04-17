@@ -28,7 +28,6 @@ class DSIGNAL_EXPORT SignalProcessorSimple: public SignalProcessor
 {
 public:
     SignalProcessorSimple();
-    SignalProcessorSimple(const SignalProcessorSimple &signal_processor_simple);
     ~SignalProcessorSimple() override {}
     double pop() override;
     double value() const override;

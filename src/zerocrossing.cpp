@@ -31,14 +31,6 @@ ZeroCrossing::ZeroCrossing(size_t max_size, bool throw_overflow):
 
 }
 
-ZeroCrossing::ZeroCrossing(const ZeroCrossing &s):
-    SignalProcessorBuffered(s),
-    m_zero_crossing(s.m_zero_crossing),
-    m_last_value(s.m_last_value),
-    m_has_last_value(s.m_has_last_value)
-{
-}
-
 void ZeroCrossing::push(double value)
 {
     if (std::signbit(m_last_value) != std::signbit(value) && m_has_last_value)

@@ -27,13 +27,6 @@ SignalProcessorBuffered::SignalProcessorBuffered(size_t max_size, bool throw_ove
 {
 }
 
-SignalProcessorBuffered::SignalProcessorBuffered(const SignalProcessorBuffered &s)
-{
-    m_buffer = s.m_buffer;
-    m_max_size = s.m_max_size;
-    m_throw_overflow = s.m_throw_overflow;
-}
-
 void SignalProcessorBuffered::push(double value)
 {
     if (m_buffer.size()>=m_max_size) {

@@ -28,11 +28,10 @@ namespace dsignal {
 class DSIGNAL_EXPORT Sample
 {
 public:
-    Sample();
+    Sample() = default;
     Sample(size_t channels);
     Sample(const std::vector<double> &values);
-    Sample(const Sample &sample);
-    virtual ~Sample();
+    virtual ~Sample() = default;
 
     virtual double get(size_t channel) const;
     virtual void set(size_t channel, double value);

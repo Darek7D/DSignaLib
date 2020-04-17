@@ -35,14 +35,6 @@ ArithmeticMean::ArithmeticMean(size_t mean_samples, size_t max_size, bool throw_
 
 }
 
-ArithmeticMean::ArithmeticMean(const ArithmeticMean &s):
-    SignalProcessorBuffered(s),
-    m_mean_samples(s.m_mean_samples),
-    m_current_sum(s.m_current_sum),
-    m_mean_buffer(s.m_mean_buffer)
-{
-}
-
 void ArithmeticMean::push(double value)
 {
 #ifdef USE_FENV_ACCESS

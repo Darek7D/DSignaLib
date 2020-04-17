@@ -28,12 +28,6 @@ Min::Min(size_t max_size, bool throw_overflow):
 
 }
 
-Min::Min(const Min &s):
-    SignalProcessorBuffered(s),
-    m_min(s.m_min)
-{
-}
-
 void Min::push(double value)
 {
     if (value<m_min)

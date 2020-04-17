@@ -41,7 +41,6 @@ public:
                       MixerOperation* mixer_operation,
                       std::string name="");
     SignalVectorMixer(const SignalVectorMixer& signal_mixer);
-    ~SignalVectorMixer() override;
 
     virtual SignalVectorMixer & operator=(const SignalVectorMixer &signal_mixer);
 

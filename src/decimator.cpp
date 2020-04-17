@@ -30,14 +30,6 @@ Decimator::Decimator(int factor, size_t max_size, bool throw_overflow):
         throw std::invalid_argument("Wrong value of the factor! The factor must be greater than 0.");
 }
 
-Decimator::Decimator(const Decimator &s):
-    SignalProcessorBuffered(s),
-    m_factor(s.m_factor),
-    m_counter(s.m_counter)
-{
-
-}
-
 void Decimator::push(double value)
 {
     if (m_counter%m_factor==0)

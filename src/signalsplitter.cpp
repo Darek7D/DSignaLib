@@ -29,11 +29,6 @@ SignalSplitter::SignalSplitter(std::string name):
 
 }
 
-SignalSplitter::~SignalSplitter()
-{
-
-}
-
 SignalSplitter &SignalSplitter::split(SignalVector &signal_vector_destination)
 {
     m_destinations.push_back(&signal_vector_destination);

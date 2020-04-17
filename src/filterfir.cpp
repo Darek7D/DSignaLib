@@ -39,13 +39,6 @@ FilterFir::FilterFir(const std::vector<double> &a, size_t max_buffer_size, bool 
 {
 }
 
-FilterFir::FilterFir(const FilterFir &filter):
-    SignalProcessorBuffered(filter)
-{
-    m_filter_buffer = filter.m_filter_buffer;
-    m_a = filter.m_a;
-}
-
 void FilterFir::push(double value)
 {
     m_filter_buffer.push_back(value);

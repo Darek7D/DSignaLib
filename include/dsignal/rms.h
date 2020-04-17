@@ -36,7 +36,6 @@ public:
      * \param dimension number of samples to collect
      */
     Rms(size_t dimension=2, size_t max_size=1024, bool throw_overflow=true);
-    Rms(const Rms &rms);
     void push(double value) override;
     void reset() override;
     Rms *clone() const override;

@@ -31,11 +31,6 @@ Abs::Abs(size_t max_size, bool throw_overflow):
 
 }
 
-Abs::Abs(const Abs &s):
-    SignalProcessorBuffered(s)
-{
-}
-
 void Abs::push(double value)
 {
     SignalProcessorBuffered::push(fabs(value));

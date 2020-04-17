@@ -32,15 +32,6 @@ DecimatorMean::DecimatorMean(size_t mean_samples, size_t max_size, bool throw_ov
         throw std::invalid_argument("Wrong value of the mean samples! Mean samples must be greater than 0.");
 }
 
-DecimatorMean::DecimatorMean(const DecimatorMean &s):
-    SignalProcessorBuffered(s),
-    m_mean_samples(s.m_mean_samples),
-    m_current_sum(0),
-    m_current_index(s.m_current_index)
-{
-
-}
-
 void DecimatorMean::push(double value)
 {
 #ifdef USE_FENV_ACCESS

@@ -31,7 +31,6 @@ namespace dsignal {
 class DSIGNAL_EXPORT ZeroCrossing: public SignalProcessorBuffered {
 public:
     ZeroCrossing(size_t max_size=1024, bool throw_overflow=true);
-    ZeroCrossing(const ZeroCrossing &s);
     void push(double value) override;
     void reset() override;
     ZeroCrossing *clone() const override;

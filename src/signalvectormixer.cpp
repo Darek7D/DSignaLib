@@ -45,11 +45,6 @@ SignalVectorMixer::SignalVectorMixer(const SignalVectorMixer &signal_mixer):
 
 }
 
-SignalVectorMixer::~SignalVectorMixer()
-{
-
-}
-
 SignalVectorMixer & SignalVectorMixer::operator=(const SignalVectorMixer &signal_mixer)
 {
     SignalVector::operator=(signal_mixer);

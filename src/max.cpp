@@ -32,12 +32,6 @@ Max::Max(size_t max_size, bool throw_overflow):
 
 }
 
-Max::Max(const Max &s):
-    SignalProcessorBuffered(s),
-    m_max(s.m_max)
-{
-}
-
 void Max::push(double value)
 {
     if (value>m_max)

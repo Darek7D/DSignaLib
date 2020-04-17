@@ -20,11 +20,6 @@
 
 namespace dsignal {
 
-Sample::Sample()
-{
-
-}
-
 Sample::Sample(size_t channels)
 {
     m_values.resize(channels, 0.0);
@@ -33,16 +28,6 @@ Sample::Sample(size_t channels)
 Sample::Sample(const std::vector<double> &values)
 {
     m_values = values;
-}
-
-Sample::Sample(const Sample &sample)
-{
-    m_values = sample.m_values;
-}
-
-Sample::~Sample()
-{
-
 }
 
 double Sample::get(size_t channel) const

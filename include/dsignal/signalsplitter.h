@@ -32,7 +32,6 @@ class DSIGNAL_EXPORT SignalSplitter: public SignalVector
 {
 public:
     SignalSplitter(std::string name="splitter");
-    ~SignalSplitter() override;
 
     SignalSplitter& split(SignalVector &signal_vector_destination);
     void push(const Sample &sample) override;
