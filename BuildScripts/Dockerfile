@@ -1,7 +1,7 @@
 FROM qt
 RUN apt update
 
-RUN mkdir /build /output
+RUN mkdir /output
 WORKDIR /build
 
 COPY . /dsignal
