@@ -36,6 +36,21 @@ double SignalProcessorSimple::pop()
 
 double SignalProcessorSimple::value() const
 {
+    checkHas();
+    return m_value;
+}
+
+double& SignalProcessorSimple::at(size_t n)
+{
+    checkHas();
+    checkRange(n);
+    return m_value;
+}
+
+const double& SignalProcessorSimple::at(size_t n) const
+{
+    checkHas();
+    checkRange(n);
     return m_value;
 }
 
@@ -65,5 +80,16 @@ SignalProcessorSimple *SignalProcessorSimple::clone() const
     return new SignalProcessorSimple(*this);
 }
 
+void SignalProcessorSimple::checkHas() const
+{
+    if (!m_has)
+        throw std::out_of_range("No data in buffer!");
+}
+
+void SignalProcessorSimple::checkRange(size_t n) const
+{
+    if (n!=0)
+        throw std::out_of_range("The element is out of range!");
+}
 
 }

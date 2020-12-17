@@ -58,6 +58,10 @@ public:
 
     double value() const override;
 
+    double& at(size_t n) override;
+
+    const double& at(size_t n) const override;
+
     void reset() override;
 
     SignalProcessorBuffered *clone() const override;

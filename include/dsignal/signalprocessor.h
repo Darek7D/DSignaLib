@@ -56,6 +56,16 @@ public:
     virtual double value() const = 0;
 
     /**
+     * Returns a reference to the value at position n in the SignalProcessor.
+     */
+    virtual double& at(size_t n) = 0;
+
+    /**
+     * Returns a const reference to the value at position n in the SignalProcessor.
+     */
+    virtual const double& at(size_t n) const = 0;
+
+    /**
      * The number of data available to pop();
      */
     virtual size_t size() const = 0;

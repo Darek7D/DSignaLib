@@ -52,6 +52,16 @@ double SignalProcessorBuffered::value() const
     return m_buffer.front();
 }
 
+double& SignalProcessorBuffered::at(size_t n)
+{
+    return m_buffer.at(n);
+}
+
+const double& SignalProcessorBuffered::at(size_t n) const
+{
+    return m_buffer.at(n);
+}
+
 bool SignalProcessorBuffered::has() const
 {
     return !m_buffer.empty();

@@ -22,7 +22,7 @@
 using namespace dsignal;
 
 
-TEST_CASE("signalprocessorbuffered testPushPop", "[signalprocessorbuffered]")
+TEST_CASE("signalprocessorbuffered testPushPopHas", "[signalprocessorbuffered]")
 {
     SignalProcessorBuffered sig;
     REQUIRE(sig.has()==false);
@@ -85,7 +85,7 @@ TEST_CASE("signalprocessorbuffered testUnderflow", "[signalprocessorbuffered]")
     REQUIRE(exception);
 }
 
-TEST_CASE("signalprocessorbuffered testClone")
+TEST_CASE("signalprocessorbuffered testClone", "[signalprocessorbuffered]")
 {
     SignalProcessorBuffered sig(4);
     sig.push(1);
@@ -98,4 +98,18 @@ TEST_CASE("signalprocessorbuffered testClone")
     REQUIRE(sig2->pop()==2);
 
     delete sig2;
+}
+
+TEST_CASE("signalprocessorbuffered testAt", "[signalprocessorbuffered]")
+{
+    SignalProcessorBuffered sig(4);
+    sig.push(1);
+    sig.push(2);
+    sig.push(3);
+
+    REQUIRE(sig.at(0)==1);
+    REQUIRE(sig.at(1)==2);
+    REQUIRE(sig.at(2)==3);
+
+    REQUIRE_THROWS_AS(sig.at(3), std::out_of_range);
 }
