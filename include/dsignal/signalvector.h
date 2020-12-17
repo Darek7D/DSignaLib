@@ -69,6 +69,11 @@ public:
     virtual Sample value() const;
 
     /**
+     * Gets the values at the position 'n' from underlying SignalProcessor's and return as a Sample.
+     */
+    virtual Sample at(size_t n) const;
+
+    /**
      * Checks if a SignalVector has a value, that you can pop().
      */
     virtual bool has() const;

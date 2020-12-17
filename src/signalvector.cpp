@@ -87,6 +87,15 @@ Sample SignalVector::value() const
     return s;
 }
 
+Sample SignalVector::at(size_t n) const
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+    Sample s(channels());
+    for (size_t c=0; c<channels(); c++)
+        s.set(c, m_signals.at(c)->at(n));
+    return s;
+}
+
 bool SignalVector::has() const
 {
     std::lock_guard<std::mutex> guard(m_mutex);
