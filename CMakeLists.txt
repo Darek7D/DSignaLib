@@ -6,7 +6,7 @@ set (CMAKE_CXX_STANDARD 11)
 # LIBRARY VERSION
 ##############################################################################
 SET (DSIGNAL_VERSION_MAJOR 0)
-SET (DSIGNAL_VERSION_MINOR 7)
+SET (DSIGNAL_VERSION_MINOR 8)
 SET (DSIGNAL_VERSION_FIX 0)
 
 configure_file("${CMAKE_SOURCE_DIR}/include/dsignal/version.h.in" "${CMAKE_BINARY_DIR}/include/dsignal/version.h" @ONLY)

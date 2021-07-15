@@ -73,12 +73,18 @@ public:
     virtual void connect(SignalFlow* input, SignalFlow* output);
 
     /**
+     * Disconnects the connection between two SignalFlow's.
+     * All data from input SignalFlow will be transfered to output SignalFlow.
+     */
+    virtual bool disconnect(SignalFlow* input, SignalFlow* output);
+
+    /**
      * Clear all connections.
      */
     virtual void clearConnections();
 
     /**
-     * Declare the given SignalFlow as input. When you declare the input,
+     * Declares the given SignalFlow as input. When you declare the input,
      * you can access it using the input() method.
      * The SignalFlow declaration doesn't affect the processing, it is only used
      * for easy identification by the library user.
@@ -88,7 +94,7 @@ public:
     virtual void setInput(SignalFlow& sf, int id=0);
 
     /**
-     * Declare the given SignalFlow as output. When you declare the output,
+     * Declares the given SignalFlow as output. When you declare the output,
      * you can access it using the output() method.
      * The SignalFlow declaration doesn't affect the processing, it is only used
      * for easy identification by the library user.
@@ -133,6 +139,14 @@ public:
      * Dump the graph of all connections in Graphvis format.
      */
     virtual std::string dumpGraph() const;
+
+    /**
+     * Returns the SignalFlows connected to the provided source SignalFlow object.
+     * \param source_signal_flow source SignalFlow.
+     * \return connected SignalFlows to the provided source, or an empty vector
+     * if there is no connections or provided source.
+     */
+    virtual std::vector<SignalFlow*> connectedSignals(SignalFlow* source_signal_flow);
 
 private:
     std::unordered_map<SignalFlow*, std::vector<SignalFlow*>> m_signal_connections;
