@@ -32,6 +32,35 @@ void SignalFlowSession::connect(SignalFlow* input, SignalFlow* output) {
     m_signal_connections[input].push_back(output);
 }
 
+bool SignalFlowSession::disconnect(SignalFlow *input, SignalFlow *output)
+{
+    auto connection_item = m_signal_connections.find(input);
+    if (connection_item == m_signal_connections.end()) {
+        return false;
+    }
+
+    auto output_items = connection_item->second;
+    auto size_before = output_items.size();
+
+    output_items.erase(
+        std::remove_if(output_items.begin(),
+                       output_items.end(),
+                       [output](SignalFlow * o) { return o == output; }),
+        output_items.end());
+
+    auto size_after = output_items.size();
+    if (size_after==0) {
+        m_signal_connections.erase(connection_item);
+        return true;
+    }
+
+    if (size_after == size_before) {
+        return false;
+    }
+
+    return true;
+}
+
 void SignalFlowSession::clearConnections()
 {
     m_signal_connections.clear();
@@ -139,6 +168,16 @@ std::string SignalFlowSession::dumpGraph() const
     }
     ss << "}" << std::endl;
     return ss.str();
+}
+
+std::vector<SignalFlow *> SignalFlowSession::connectedSignals(SignalFlow *source_signal_flow)
+{
+    auto connection_item = m_signal_connections.find(source_signal_flow);
+    if (connection_item == m_signal_connections.end()) {
+        return std::vector<SignalFlow *>();
+    }
+
+    return connection_item->second;
 }
 
 std::string SignalFlowSession::makeDotSymbol(const SignalFlow *signalflow) const
