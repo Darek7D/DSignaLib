@@ -1,5 +1,5 @@
 # DSignal library
-Travis CI: [![Build Status](https://travis-ci.com/Darek7D/DSignal.svg?branch=master)](https://travis-ci.com/Darek7D/DSignal)
+Travis CI: [![Build Status](https://travis-ci.com/Darek7D/DSignal.svg?token=7BSCNuExDRWpzPKUZE88&branch=master)](https://travis-ci.com/Darek7D/DSignal)
 
 The small simple signal pipeline library.
 
