@@ -74,9 +74,15 @@ public:
 
     /**
      * Disconnects the connection between two SignalFlow's.
-     * All data from input SignalFlow will be transfered to output SignalFlow.
+     * \returns true if the connection is successfully broken, otherwise returns false.
      */
     virtual bool disconnect(SignalFlow* input, SignalFlow* output);
+
+    /**
+     * Disconnects all output connections from provided SignalFlow.
+     * \returns true if all connections are successfully broken, otherwise returns false.
+     */
+    virtual bool disconnect(SignalFlow* input);
 
     /**
      * Clear all connections.

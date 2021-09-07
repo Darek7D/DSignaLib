@@ -133,3 +133,26 @@ SCENARIO("Signal flow disconnection", "[signalflow]")
         }
     }
 }
+
+SCENARIO("Signal flow disconnection all", "[signalflow]")
+{
+    GIVEN("Two connected signals") {
+        SignalFlowSession s;
+        SignalFlow sig1(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 1"));
+        SignalFlow sig2a(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 2A"));
+        SignalFlow sig2b(&s, SignalVector(4, SignalProcessorBuffered(), "Signal 2B"));
+        sig1 >> sig2a;
+        sig1 >> sig2b;
+        REQUIRE(s.connectedSignals(&sig1).size()==2);
+
+        WHEN("All signals are disconnected") {
+            REQUIRE(s.disconnect(&sig1));
+            THEN("There are no connection in the list") {
+                REQUIRE(s.connectedSignals(&sig1).size()==0);
+            }
+            AND_THEN("Second disconnection returns false") {
+                REQUIRE_FALSE(s.disconnect(&sig1));
+            }
+        }
+    }
+}
