@@ -91,12 +91,20 @@ void SignalFlowSession::setOutput(SignalFlow& sf, int id){
     m_outputs[id] = &sf;
 }
 
+SignalFlow *SignalFlowSession::inputSignalFlow(int id) const {
+    return m_inputs.at(id);
+}
+
+SignalFlow *SignalFlowSession::outputSignalFlow(int id) const {
+    return m_outputs.at(id);
+}
+
 SignalVector *SignalFlowSession::input(int id) const {
-    return m_inputs.at(id)->m_vector;
+    return m_inputs.at(id)->vector();
 }
 
 SignalVector *SignalFlowSession::output(int id) const {
-    return m_outputs.at(id)->m_vector;
+    return m_outputs.at(id)->vector();
 }
 
 void SignalFlowSession::process() {
