@@ -110,13 +110,25 @@ public:
     virtual void setOutput(SignalFlow& sf, int id=0);
 
     /**
-     * Returns the SignalFlow object declared by setInput() method
+     * Returns the pointer to SignalFlow object declared by setInput() method
+     * \param id unique identification number defined by setInput() method.
+     */
+    virtual SignalFlow* inputSignalFlow(int id=0) const;
+
+    /**
+     * Returns the pointer to SignalFlow object declared by setOutput() method
+     * \param id unique identification number defined by setOutput() method.
+     */
+    virtual SignalFlow* outputSignalFlow(int id=0) const;
+
+    /**
+     * Returns the pointer to SignalVector of SignalFlow object declared by setInput() method
      * \param id unique identification number defined by setInput() method.
      */
     virtual SignalVector* input(int id=0) const;
 
     /**
-     * Returns the SignalFlow object declared by setOutput() method
+     * Returns the pointer to SignalVector of SignalFlow object declared by setOutput() method
      * \param id unique identification number defined by setOutput() method.
      */
     virtual SignalVector* output(int id=0) const;
