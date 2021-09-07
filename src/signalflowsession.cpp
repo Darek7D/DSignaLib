@@ -39,7 +39,7 @@ bool SignalFlowSession::disconnect(SignalFlow *input, SignalFlow *output)
         return false;
     }
 
-    auto output_items = connection_item->second;
+    auto & output_items = connection_item->second;
     auto size_before = output_items.size();
 
     output_items.erase(
