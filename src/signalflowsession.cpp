@@ -61,6 +61,21 @@ bool SignalFlowSession::disconnect(SignalFlow *input, SignalFlow *output)
     return true;
 }
 
+bool SignalFlowSession::disconnect(SignalFlow* input)
+{
+    auto connection_item = m_signal_connections.find(input);
+    if (connection_item == m_signal_connections.end()) {
+        return false;
+    }
+
+    auto & output_items = connection_item->second;
+    output_items.erase(output_items.begin(), output_items.end());
+
+    m_signal_connections.erase(connection_item);
+
+    return true;
+}
+
 void SignalFlowSession::clearConnections()
 {
     m_signal_connections.clear();
