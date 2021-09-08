@@ -111,7 +111,7 @@ void SignalFlowSession::process() {
     bool finished = false;
     while (!finished) {
         finished = true;
-        for (auto pair: m_signal_connections) {
+        for (auto& pair: m_signal_connections) {
             while (pair.first->m_vector->has()) {
                 // Pop the sample from input connection
                 Sample s = pair.first->m_vector->pop();
@@ -129,7 +129,7 @@ void SignalFlowSession::process() {
 
 void SignalFlowSession::reset()
 {
-    for (auto pair: m_signal_connections) {
+    for (auto& pair: m_signal_connections) {
         pair.first->vector()->reset();
         for (auto destination: pair.second) {
             destination->vector()->reset();
@@ -156,7 +156,7 @@ std::string SignalFlowSession::dumpGraph() const
        << "  node [shape=box];" << std::endl
        << "  rankdir=LR;" << std::endl << std::endl;
 
-    for (auto connection: m_signal_connections) {
+    for (auto& connection: m_signal_connections) {
         for (auto o: connection.second) {
             ss << "  " << makeDotSymbol(connection.first) << "->"
                << stripStrToDotSymbol(o->m_vector->getName()) << ";" << std::endl;
@@ -178,7 +178,7 @@ std::string SignalFlowSession::dumpGraph() const
 
     // Labels
     std::unordered_set<SignalFlow*> m_all;
-    for (auto connection: m_signal_connections) {
+    for (auto& connection: m_signal_connections) {
         m_all.insert(connection.first);
         for (auto o: connection.second) {
             m_all.insert(o);

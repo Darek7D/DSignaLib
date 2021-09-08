@@ -7,7 +7,7 @@ set (CMAKE_CXX_STANDARD 11)
 ##############################################################################
 SET (DSIGNAL_VERSION_MAJOR 0)
 SET (DSIGNAL_VERSION_MINOR 9)
-SET (DSIGNAL_VERSION_FIX 0)
+SET (DSIGNAL_VERSION_FIX 1)
 
 configure_file("${CMAKE_SOURCE_DIR}/include/dsignal/version.h.in" "${CMAKE_BINARY_DIR}/include/dsignal/version.h" @ONLY)
 
