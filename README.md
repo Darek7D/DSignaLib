@@ -1,5 +1,4 @@
 # DSignal library
-Travis CI: [![Build Status](https://travis-ci.com/Darek7D/DSignal.svg?token=7BSCNuExDRWpzPKUZE88&branch=master)](https://travis-ci.com/Darek7D/DSignal)
 
 The small simple signal pipeline library.
 
@@ -93,12 +92,10 @@ Sample out = s.output()->pop();
 ```
 
 The visualisation of other sample session:
-![SignalFlow Example](http://tedtronix.pl/inne/signalflow_example.svg)
-
+![SignalFlow Example](doc/signalflow_example.svg)
  
 ## Building
 ```sh
-git clone https://github.com/Darek7D/DSignal.git
 mkdir DSignal/build
 cd DSignal/build
 cmake ..
